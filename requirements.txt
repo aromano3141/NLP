@@ -1,0 +1,8 @@
+pytest
+python-dotenv
+pydantic
+pandas
+pyyaml
+litellm
+openai
+aiohttp
