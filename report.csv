@@ -1,0 +1,30 @@
+instruction_id,target_language,execution_mode,prompt,response,holistic_pass,cla,ila,length_score,constraint_details
+inst_001,English,PARALLEL,"Explain the theory of relativity.
+
+Please ensure your response meets the following constraints:
+1. Write exactly between 50 and 100 words.
+2. Use a formal tone.
+",ERROR: No response generated.,False,0.0,0,0.15359999999999996,"{""en_p_1"": false, ""en_p_2"": false}"
+inst_002,Spanish,SERIAL,"Escribe sobre la historia de España.
+
+You must perform the following tasks sequentially. Do not move to the next task until the current one is completed. Use the task markers to structure your response.
+
+Task 1: Resume la historia de España en 3 oraciones.
+Format your output for this task between [start_task_1] and [end_task_1] tags.
+
+Task 2: Traduce el resumen al inglés.
+Format your output for this task between [start_task_2] and [end_task_2] tags.
+
+",ERROR: No response generated.,False,0.0,0,,"{""es_s_1"": false, ""es_s_2"": false}"
+inst_003,Chinese,CONDITIONAL,"关于春天写点东西。
+
+Follow these conditional instructions:
+1. 写一首关于春天的诗。
+2. If the poem is written in classical Chinese style, then: 确保这首诗是押韵的。
+",ERROR: No response generated.,False,0.0,0,,"{""zh_c_1"": false, ""zh_c_2"": false}"
+inst_004,English,NESTED,"Discuss exercise.
+
+Complete the following nested tasks:
+1.1 List 3 benefits of exercise.
+  2.1 Format it as a bulleted list.
+",ERROR: No response generated.,False,0.0,0,,"{""en_n_1"": false, ""en_n_1a"": false}"
