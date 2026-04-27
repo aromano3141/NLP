@@ -20,8 +20,8 @@ def save_dataset(dataset: list):
 
 async def generate_full_dataset():
     logger.info("Starting dataset generation process")
-    generator = SeedGenerator(model_name="gpt-4o")
-    validator = InstructionValidator(model_name="gpt-4o")
+    generator = SeedGenerator(model_name="meta/Meta-Llama-3.1-405B-Instruct")
+    validator = InstructionValidator(model_name="openai/gpt-4.1-nano")
     
     dataset = []
     generated_counts = {
@@ -45,7 +45,7 @@ async def generate_full_dataset():
         # If the target language isn't English, prepare the localizer
         localizer = None
         if target_lang != "English":
-            localizer = LocalizationPipeline(target_languages=[target_lang], model_name="gpt-4o")
+            localizer = LocalizationPipeline(target_languages=[target_lang], model_name="gpt-5")
             
         for category, cat_target in category_targets.items():
             logger.info(f"Generating {cat_target} {target_lang} prompts for category: {category}")
