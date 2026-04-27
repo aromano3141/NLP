@@ -10,6 +10,9 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import HttpResponseError
 
+from google import genai
+from google.genai import types
+
 load_dotenv()
 
 logger = logging.getLogger(__name__)
@@ -19,6 +22,13 @@ DEFAULT_MODEL = "openai/gpt-4o"
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 FALLBACK_MODEL = "openrouter/free"
 #FALLBACK_MODEL = "tencent/hy3-preview:free"
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+DEFAULT_MODEL = "gemini-2.5-flash" 
+if not GEMINI_API_KEY:
+    logger.error("GEMINI_API_KEY is missing from environment variables!")
+
+gem_client = genai.Client(api_key=GEMINI_API_KEY)
 
 client = ChatCompletionsClient(
     endpoint=ENDPOINT,
@@ -86,44 +96,68 @@ async def fallback_openrouter(
     except Exception as e:
         logger.error(f"Error during OpenRouter fallback: {e}", exc_info=True)
         return ""
+    
 
 async def async_generate_text(
     prompt: str,
-    model: str = DEFAULT_MODEL,
+    model: str = "gemini-3.1-flash-lite-preview",
     max_tokens: int = 5000,
     temperature: float = 0.7,
     system_prompt: str = "You are a helpful assistant.",
     json_mode: bool = False
 ) -> str:
-    """Asynchronous generation using GitHub Models with Fallback."""
-    try:
-        logger.debug(f"Calling {model} (async)")
-        kwargs = {
-            "model": model,
-            "messages": [
-                SystemMessage(system_prompt),
-                UserMessage(prompt),
-            ],
-            "temperature": temperature,
-            "top_p": 1.0,
-            "max_tokens": max_tokens,
-        }
-        if json_mode:
-            kwargs["response_format"] = "json_object"
-            
-        response = await asyncio.to_thread(
-            client.complete,
-            **kwargs
-        )
-        return response.choices[0].message.content
+    """Router function that selects between Gemini, GitHub, and OpenRouter."""
+    
+    # --- ROUTE TO GEMINI ---
+    if "gemini" in model.lower():
+        if not gem_client:
+            logger.error("Gemini client not initialized. Check API Key.")
+            return ""
+        try:
+            logger.debug(f"Calling Gemini ({model})")
+            config_kwargs = {
+                "system_instruction": system_prompt,
+                "max_output_tokens": max_tokens,
+                "temperature": temperature,
+            }
+            if json_mode:
+                config_kwargs["response_mime_type"] = "application/json"
 
-    except HttpResponseError as e:
-        status_code = getattr(e, 'status_code', None)
-        if status_code == 429 or "Too many requests" in str(e):
-            logger.warning(f"Rate limit (429) calling {model} on GitHub. Triggering fallback.")
-            return await fallback_openrouter(prompt, system_prompt, max_tokens, temperature, json_mode)
-        logger.error(f"HTTP error calling {model} on GitHub: {e}")
-        raise
-    except Exception as e:
-        logger.error(f"Unexpected error calling {model} on GitHub: {e}")
-        raise
+            response = await gem_client.aio.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=types.GenerateContentConfig(**config_kwargs)
+            )
+            return response.text
+        except Exception as e:
+            # If Gemini hits a rate limit (429), fall back to OpenRouter
+            if "429" in str(e) or "quota" in str(e).lower():
+                logger.warning(f"Gemini Rate Limit hit. Falling back to OpenRouter.")
+                return await fallback_openrouter(prompt, system_prompt, max_tokens, temperature, json_mode)
+            logger.error(f"Gemini Error: {e}")
+            return ""
+
+    else:
+        try:
+            logger.debug(f"Calling GitHub ({model})")
+            kwargs = {
+                "model": model,
+                "messages": [SystemMessage(system_prompt), UserMessage(prompt)],
+                "temperature": temperature,
+                "top_p": 1.0,
+                "max_tokens": max_tokens,
+            }
+            if json_mode:
+                kwargs["response_format"] = "json_object"
+                
+            response = await asyncio.to_thread(client.complete, **kwargs)
+            return response.choices[0].message.content
+
+        except HttpResponseError as e:
+            if getattr(e, 'status_code', None) == 429 or "Too many requests" in str(e):
+                logger.warning(f"GitHub Rate Limit hit. Falling back to OpenRouter.")
+                return await fallback_openrouter(prompt, system_prompt, max_tokens, temperature, json_mode)
+            raise
+        except Exception as e:
+            logger.error(f"GitHub Unexpected Error: {e}")
+            raise

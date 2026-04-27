@@ -89,6 +89,12 @@ class LocalizationPipeline:
                 parsed = LocalizationSchema(**raw_json)
                 break
             except (json.JSONDecodeError, ValidationError) as e:
+
+                timestamp = int(time.time())
+                filename = f"benchmark/raw_model_outputs/localization_{english_prompt.id}_{target_lang}_attempt_{attempt+1}_{timestamp}.txt"
+                with open(filename, "w", encoding="utf-8") as f:
+                    f.write(response)
+                logger.info(f"Saved raw model output to {filename}")
                 logger.error(f"Failed to parse localization JSON for {target_lang} on attempt {attempt+1}: {e}")
                 if attempt == 2:
                     return None
