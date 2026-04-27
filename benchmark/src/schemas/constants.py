@@ -34,9 +34,16 @@ CONSTRAINT_DIMENSIONS = {
 
 LANGUAGES = ["English", "Chinese", "Arabic", "Hindi"]
 
+# LANGUAGE_DISTRIBUTION = {
+#     "English": 101,
+#     "Chinese": 75,
+#     "Arabic": 62,
+#     "Hindi": 62
+# }
+
 LANGUAGE_DISTRIBUTION = {
-    "English": 101,
-    "Chinese": 75,
-    "Arabic": 62,
-    "Hindi": 62
+    "English": 3,
+    "Chinese": 2,
+    "Arabic": 2,
+    "Hindi": 2
 }

@@ -42,3 +42,36 @@ class EvaluationResult(BaseModel):
     rfr_score: float = Field(..., description="Requirement Following Ratio")
     ifr_score: float = Field(..., description="Instruction Following Ratio (1.0 if all met, 0.0 otherwise)")
     constraint_results: Dict[str, bool] = Field(..., description="Mapping of constraint id to boolean success")
+
+class ValidationResult(BaseModel):
+    is_valid: bool = Field(..., description="Whether the prompt is valid")
+    reason: str = Field(..., description="Reason if invalid, or PASS")
+
+class SubjectiveEvalResult(BaseModel):
+    success: bool = Field(..., description="Whether the constraint was successfully followed")
+
+class LocalizationConstraint(BaseModel):
+    description: str
+
+class LocalizationSubTask(BaseModel):
+    instruction: str
+    constraints: List[LocalizationConstraint] = Field(default_factory=list)
+
+class LocalizationSchema(BaseModel):
+    localized_base_text: Optional[str] = None
+    localized_instruction: str
+    cultural_accessibility_labels: List[str] = Field(default_factory=list)
+    sub_tasks: List[LocalizationSubTask] = Field(default_factory=list)
+
+class ParsedConstraint(BaseModel):
+    type: str
+    description: str
+
+class ParsedSubTask(BaseModel):
+    instruction: str
+    constraints: List[ParsedConstraint] = Field(default_factory=list)
+
+class ParsedPromptData(BaseModel):
+    instruction: str
+    sub_tasks: List[ParsedSubTask] = Field(default_factory=list)
+

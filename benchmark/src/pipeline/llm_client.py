@@ -1,42 +1,101 @@
 import os
+import asyncio
+import logging
 from dotenv import load_dotenv
-import litellm
-from litellm import completion
+
+from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.models import SystemMessage, UserMessage
+from azure.core.credentials import AzureKeyCredential
 
 load_dotenv()
 
-# Optionally configure litellm settings globally
-litellm.set_verbose = False
+logger = logging.getLogger(__name__)
 
-def generate_text(prompt: str, model: str = "gpt-4o", max_tokens: int = 2000, temperature: float = 0.7) -> str:
-    """
-    Generate text using litellm.
-    Supports models like 'gpt-4o', 'deepseek/deepseek-chat', etc.
-    """
+ENDPOINT = "https://models.github.ai/inference"
+DEFAULT_MODEL = "openai/gpt-4o"
+
+client = ChatCompletionsClient(
+    endpoint=ENDPOINT,
+    credential=AzureKeyCredential(os.environ["GITHUB_TOKEN"]),
+)
+
+def generate_text(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = 2000,
+    temperature: float = 0.7,
+    system_prompt: str = "You are a helpful assistant."
+) -> str:
     try:
-        response = completion(
+        logger.debug(f"Calling {model} (sync)")
+        response = client.complete(
             model=model,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                SystemMessage(system_prompt),
+                UserMessage(prompt),
+            ],
+            temperature=temperature,
+            top_p=1.0,
             max_tokens=max_tokens,
-            temperature=temperature
         )
+
         return response.choices[0].message.content
+
     except Exception as e:
-        print(f"Error calling {model}: {e}")
+        logger.error(f"Error calling {model}: {e}", exc_info=True)
         return ""
 
-async def async_generate_text(prompt: str, model: str = "gpt-4o", max_tokens: int = 2000, temperature: float = 0.7) -> str:
-    """
-    Async version for generating text.
-    """
+
+async def async_generate_text(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = 2000,
+    temperature: float = 0.7,
+    system_prompt: str = "You are a helpful assistant."
+) -> str:
     try:
-        response = await litellm.acompletion(
+        logger.debug(f"Calling {model} (async)")
+        response = await asyncio.to_thread(
+            client.complete,
             model=model,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                SystemMessage(system_prompt),
+                UserMessage(prompt),
+            ],
+            temperature=temperature,
+            top_p=1.0,
             max_tokens=max_tokens,
-            temperature=temperature
         )
+
         return response.choices[0].message.content
+
+    except Exception as e:
+        logger.error(f"Error calling {model}: {e}", exc_info=True)
+        return ""
+
+
+async def async_generate_text(
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = 10000,
+    temperature: float = 0.7,
+    system_prompt: str = "You are a helpful assistant."
+) -> str:
+    try:
+        response = await asyncio.to_thread(
+            client.complete,
+            model=model,
+            messages=[
+                SystemMessage(system_prompt),
+                UserMessage(prompt),
+            ],
+            temperature=temperature,
+            top_p=1.0,
+            max_tokens=max_tokens,
+        )
+
+        return response.choices[0].message.content
+
     except Exception as e:
         print(f"Error calling {model}: {e}")
         return ""

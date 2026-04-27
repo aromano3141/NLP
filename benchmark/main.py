@@ -1,11 +1,11 @@
 import asyncio
 import os
 import json
-from NLP.benchmark.src.pipeline.seed_generation import SeedGenerator
-from NLP.benchmark.src.pipeline.localization import LocalizationPipeline
-from NLP.benchmark.src.eval.validator import InstructionValidator
-from NLP.benchmark.src.eval.evaluator import Evaluator
-from NLP.benchmark.src.schemas.models import GeneratedOutput
+from src.pipeline.seed_generation import SeedGenerator
+from src.pipeline.localization import LocalizationPipeline
+from src.eval.validator import InstructionValidator
+from src.eval.evaluator import Evaluator
+from src.schemas.models import GeneratedOutput
 
 async def test_pipeline():
     print("Starting pipeline test...")
@@ -49,7 +49,6 @@ async def test_pipeline():
     print(f"Hindi Instruction: {hindi_prompt.instruction}")
 
     print("\n[4] Simulating Model Generation (Mock)...")
-    # In reality, you'd feed the prompt to the model you are benchmarking
     mock_output_text = "Here is the response. | Entity | Type |\n|---|---|\n| Apple | Fruit |" 
     mock_output = GeneratedOutput(
         prompt_id=seed_prompt.id,
