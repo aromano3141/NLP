@@ -156,7 +156,14 @@ class SeedGenerator:
         parsed_data = None
         for attempt in range(3):
             logger.debug(f"Parsing structured output, attempt {attempt+1}")
-            structured_output_str = await async_generate_text(parsing_prompt, model=self.model_name, system_prompt=system_prompt)
+            structured_output_str = await async_generate_text(parsing_prompt, model=self.model_name, system_prompt=system_prompt, json_mode=True)
+            
+            if not structured_output_str:
+                logger.warning(f"Received empty response from model on attempt {attempt+1}")
+                if attempt == 2:
+                    logger.error("All parsing attempts failed due to empty response. Returning None.")
+                    return None
+                continue
             
             # Clean JSON markdown blocks if present
             if structured_output_str.startswith("```json"):

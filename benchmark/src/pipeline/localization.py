@@ -1,6 +1,8 @@
 import asyncio
 import json
 import logging
+import os
+import time
 from typing import List, Optional
 from src.schemas.models import Prompt, LocalizationSchema
 from pydantic import ValidationError
@@ -56,19 +58,43 @@ class LocalizationPipeline:
         }}
         """
         
-        response = await async_generate_text(prompt_text, model=self.model_name, system_prompt=system_prompt)
-        
-        try:
-            # Clean JSON markdown
-            if response.startswith("```json"):
-                response = response.split("```json")[1].split("```")[0].strip()
-            elif response.startswith("```"):
-                response = response.split("```")[1].split("```")[0].strip()
+        os.makedirs("benchmark/raw_model_outputs", exist_ok=True)
+        parsed = None
+
+        for attempt in range(3):
+            response = await async_generate_text(prompt_text, model=self.model_name, system_prompt=system_prompt, json_mode=True)
             
-            raw_json = json.loads(response)
-            parsed = LocalizationSchema(**raw_json)
-        except (json.JSONDecodeError, ValidationError) as e:
-            logger.error(f"Failed to parse localization JSON for {target_lang}: {e}")
+            # Always save the raw output
+            timestamp = int(time.time())
+            filename = f"benchmark/raw_model_outputs/localization_{english_prompt.id}_{target_lang}_attempt_{attempt+1}_{timestamp}.txt"
+            with open(filename, "w", encoding="utf-8") as f:
+                f.write(response)
+            logger.info(f"Saved raw model output to {filename}")
+            
+            try:
+                # Clean JSON markdown
+                cleaned_response = response
+                if cleaned_response.startswith("```json"):
+                    cleaned_response = cleaned_response.split("```json")[1].split("```")[0].strip()
+                elif cleaned_response.startswith("```"):
+                    cleaned_response = cleaned_response.split("```")[1].split("```")[0].strip()
+                
+                # Check if there are any trailing characters after the JSON
+                start_idx = cleaned_response.find("{")
+                end_idx = cleaned_response.rfind("}")
+                if start_idx != -1 and end_idx != -1:
+                    cleaned_response = cleaned_response[start_idx:end_idx+1]
+
+                raw_json = json.loads(cleaned_response)
+                parsed = LocalizationSchema(**raw_json)
+                break
+            except (json.JSONDecodeError, ValidationError) as e:
+                logger.error(f"Failed to parse localization JSON for {target_lang} on attempt {attempt+1}: {e}")
+                if attempt == 2:
+                    return None
+                logger.info(f"Retrying localization for {target_lang}...")
+
+        if not parsed:
             return None
 
         # Create a deep copy of the original prompt but replace fields
