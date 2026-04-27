@@ -7,7 +7,7 @@ from .llm_client import async_generate_text
 from src.schemas.models import Prompt, SubTask, Constraint, ConstraintType, ParsedPromptData
 from src.schemas.constants import CORE_TASK_CATEGORIES, CONSTRAINT_DIMENSIONS
 from pydantic import ValidationError
-
+import random
 logger = logging.getLogger(__name__)
 
 class SeedGenerator:
@@ -68,7 +68,7 @@ class SeedGenerator:
             [f"- {key}: {', '.join(map(str, values))}" 
             for key, values in CONSTRAINT_DIMENSIONS.items()]
         )
-        num_constraints = {"Low": "1-2", "Medium": "3-4", "High": "5"}[density]
+        num_constraints = {"Low": "1-4", "Medium": "4-5", "High": "6-8"}[density]
         
         prompt = f"""
         Modify the original constraint information for each instruction.
@@ -105,8 +105,8 @@ class SeedGenerator:
         """Orchestrate the full pipeline to generate one seed prompt in English."""
         logger.info(f"Generating seed prompt for category '{category}' with density '{density}'")
         base_text = await self.generate_base_text(category)
-        
-        tasks_response = await self.expand_tasks(base_text, category)
+        random_num_tasks = random.randint(3, 10)
+        tasks_response = await self.expand_tasks(base_text, category,random_num_tasks)
         
         constraints_response = await self.expand_constraints(tasks_response, density)
         
