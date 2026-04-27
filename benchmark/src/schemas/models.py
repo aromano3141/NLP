@@ -13,7 +13,6 @@ class Constraint(BaseModel):
     id: str = Field(..., description="Unique identifier for the constraint")
     type: ConstraintType
     description: str = Field(..., description="Detailed description of the constraint")
-    # For measurable constraints
     metadata: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Metadata for evaluation (e.g. word count, format type)")
 
 class SubTask(BaseModel):
@@ -29,7 +28,6 @@ class Prompt(BaseModel):
     sub_tasks: List[SubTask] = Field(default_factory=list, description="List of individual subtasks")
     reading_materials: Optional[str] = Field(None, description="Any base text or dialogue provided as context")
     
-    # Metadata for filtering/analysis
     cultural_accessibility_labels: List[str] = Field(default_factory=list, description="Labels for cultural anchors")
     density_level: str = Field(..., description="Low, Medium, or High density based on constraints")
 
