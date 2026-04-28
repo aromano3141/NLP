@@ -56,7 +56,7 @@ async def generate_full_dataset():
             
             while cat_count < cat_target:
                 attempts += 1
-                density = ["Low", "Medium", "High"][cat_count % 3]
+                density = ["Low", "Medium", "High", "High","High"][cat_count % 5]
                 logger.info(f"  Attempt {attempts} (Current valid: {cat_count}/{cat_target}, Density: {density})...")
                 
                 # Step 1: Always generate a brand new unique English seed
