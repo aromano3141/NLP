@@ -1,23 +1,28 @@
 import re
 import json
 import logging
-from typing import Dict, Any, List, Optional
-from src.schemas.models import Prompt, GeneratedOutput, EvaluationResult, ConstraintType, SubjectiveEvalResult
-from src.pipeline.llm_client import async_generate_text
-from pydantic import ValidationError
+import asyncio
+from typing import Optional, Tuple
+from src.schemas.models import Prompt, GeneratedOutput, EvaluationResult, ConstraintType
+from src.eval.openrouter_client import openrouter_chat
 
 logger = logging.getLogger(__name__)
 
+
 class Evaluator:
-    def __init__(self, judge_model_name: str = "gpt-4o"):
+    def __init__(
+        self,
+        judge_model_name: str = "google/gemini-2.5-flash",
+        api_key: str | None = None,
+        concurrency: int = 10,
+    ):
         self.judge_model = judge_model_name
+        self.api_key = api_key
+        self.semaphore = asyncio.Semaphore(concurrency)
 
     def evaluate_format_constraint(self, output_text: str, constraint_desc: str) -> Optional[bool]:
-        """Deterministic Evaluation: Check for specific formats like Markdown tables, JSON."""
-        logger.debug(f"Evaluating format constraint: {constraint_desc}")
         desc_lower = constraint_desc.lower()
         if "markdown table" in desc_lower or "table format" in desc_lower:
-            # Check for markdown table structure
             return bool(re.search(r"\|.*\|", output_text)) and bool(re.search(r"\|[-\s:]+\|", output_text))
         if "json" in desc_lower:
             return "{" in output_text and "}" in output_text
@@ -25,111 +30,178 @@ class Evaluator:
             return bool(re.search(r"^\s*\d+\.", output_text, re.MULTILINE))
         if "bulleted list" in desc_lower or "bullet points" in desc_lower:
             return bool(re.search(r"^\s*[-*]\s+", output_text, re.MULTILINE))
-        
-        # If deterministic regex doesn't match a known format, return None to fallback to LLM
-        return None 
-
-    def evaluate_length_constraint(self, output_text: str, constraint_desc: str) -> Optional[bool]:
-        """Deterministic Evaluation: Calculate word or character count adherence."""
-        logger.debug(f"Evaluating length constraint: {constraint_desc}")
-        desc_lower = constraint_desc.lower()
-        
-        is_char = "character" in desc_lower
-        
-        if is_char:
-            count = len(output_text)
-        else:
-            count = len(output_text.split())
-        
-        # Look for numbers
-        numbers = [int(n) for n in re.findall(r'\d+', constraint_desc)]
-        
-        if len(numbers) == 2 and ("between" in desc_lower or "range" in desc_lower or "-" in desc_lower):
-            limit_low, limit_high = sorted(numbers)
-            return limit_low <= count <= limit_high
-            
-        elif len(numbers) >= 1:
-            limit = numbers[0]
-            if "limit" in desc_lower or "maximum" in desc_lower or "at most" in desc_lower or "no more than" in desc_lower:
-                return count <= limit
-            if "minimum" in desc_lower or "at least" in desc_lower or "no less than" in desc_lower:
-                return count >= limit
-            if "exactly" in desc_lower or "exact" in desc_lower:
-                # Allow 5% deviation for words, exact for chars
-                if is_char:
-                    return count == limit
-                return abs(count - limit) / limit <= 0.05
-        
-        # If we can't reliably parse the constraint description, fallback to LLM
         return None
 
-    async def evaluate_subjective_constraint(self, output_text: str, constraint_desc: str, c_type: str) -> bool:
-        """LLM-as-a-Judge Evaluation for Tone, Emotion, Style, Content inclusions."""
-        logger.debug(f"Evaluating subjective constraint (LLM fallback): {constraint_desc}")
-        system_prompt = "You are an impartial judge evaluating an AI model's response."
-        prompt = f"""
-        Did the model successfully follow this specific constraint?
-        
-        Constraint Type: {c_type}
-        Constraint Description: {constraint_desc}
-        
-        Model Output:
-        {output_text}
-        
-        Reply strictly with a JSON object: {{"success": true}} or {{"success": false}}
-        """
-        response = await async_generate_text(prompt, model=self.judge_model, system_prompt=system_prompt)
-        
+    @staticmethod
+    def _count_sentences(text: str) -> int:
+        return len([s for s in re.split(r'[.!?]+', text) if s.strip()])
+
+    @staticmethod
+    def _extract_numbers(constraint_desc: str) -> list[int]:
+        word_map = {
+            "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+            "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+            "eleven": 11, "twelve": 12, "fifteen": 15, "twenty": 20,
+        }
+        nums = [int(n) for n in re.findall(r'\d+', constraint_desc)]
+        for word, val in word_map.items():
+            if re.search(rf'\b{word}\b', constraint_desc.lower()):
+                nums.append(val)
+        return sorted(set(nums))
+
+    def evaluate_length_constraint(self, output_text: str, constraint_desc: str) -> Tuple[Optional[bool], Optional[float]]:
+        """Returns (passed, deviation_ratio). deviation_ratio is 0.0 when passed, >0 when failed."""
+        desc_lower = constraint_desc.lower()
+        is_char = "character" in desc_lower
+        is_sentence = "sentence" in desc_lower
+        is_paragraph = "paragraph" in desc_lower
+
+        if is_sentence:
+            count = self._count_sentences(output_text)
+        elif is_char:
+            count = len(output_text)
+        elif is_paragraph:
+            count = len([p for p in output_text.split("\n\n") if p.strip()])
+        else:
+            count = len(output_text.split())
+
+        numbers = self._extract_numbers(constraint_desc)
+
+        if len(numbers) == 2 and ("between" in desc_lower or "range" in desc_lower or "-" in desc_lower):
+            lo, hi = sorted(numbers)
+            passed = lo <= count <= hi
+            target = (lo + hi) / 2
+            deviation = 0.0 if passed else (abs(count - target) / target if target > 0 else 0.0)
+            return passed, deviation
+
+        if len(numbers) >= 1:
+            limit = numbers[0]
+            if any(k in desc_lower for k in ("limit", "maximum", "at most", "no more than")):
+                passed = count <= limit
+                deviation = 0.0 if passed else (max(0.0, (count - limit) / limit) if limit > 0 else 0.0)
+                return passed, deviation
+            if any(k in desc_lower for k in ("minimum", "at least", "no less than")):
+                passed = count >= limit
+                deviation = 0.0 if passed else (max(0.0, (limit - count) / limit) if limit > 0 else 0.0)
+                return passed, deviation
+            if any(k in desc_lower for k in ("exactly", "exact")):
+                if is_char:
+                    passed = count == limit
+                else:
+                    passed = (abs(count - limit) / limit <= 0.05) if limit > 0 else (count == 0)
+                deviation = (abs(count - limit) / limit) if limit > 0 else 0.0
+                return passed, (0.0 if passed else deviation)
+
+        return None, None
+
+    async def batch_evaluate_subjective(
+        self,
+        output_text: str,
+        constraints: list[tuple[str, str, str]],  # (c_id, c_type, c_description)
+        prompt_instruction: str,
+    ) -> dict[str, bool]:
+        if not constraints:
+            return {}
+
+        constraint_lines = "\n".join(
+            f"{i + 1}. [{ctype}] {cdesc}"
+            for i, (_, ctype, cdesc) in enumerate(constraints)
+        )
+
+        prompt = f"""You are evaluating whether an AI model's response satisfies a set of constraints.
+
+Original instruction given to the model:
+{prompt_instruction[:500]}
+
+Model response:
+{output_text[:3000]}
+
+For each constraint below, determine if the model's response satisfies it.
+
+Constraints:
+{constraint_lines}
+
+Reply ONLY with a JSON object in this exact format:
+{{"results": [true, false, ...]}}
+
+The array must have exactly {len(constraints)} boolean values, one per constraint in order."""
+
+        response = await openrouter_chat(
+            messages=[
+                {"role": "system", "content": "You are an impartial evaluation judge. Reply only with valid JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            model=self.judge_model,
+            api_key=self.api_key,
+            max_tokens=500,
+            temperature=0.0,
+            semaphore=self.semaphore,
+        )
+
         try:
-            if response.startswith("```json"):
-                response = response.split("```json")[1].split("```")[0].strip()
-            elif response.startswith("```"):
-                response = response.split("```")[1].split("```")[0].strip()
-            
-            raw_json = json.loads(response)
-            parsed = SubjectiveEvalResult(**raw_json)
-            return parsed.success
-        except (json.JSONDecodeError, ValidationError) as e:
-            # Fallback to simple string matching if json parsing fails
-            logger.warning(f"Failed to parse JSON in subjective evaluation. Falling back to string matching. Error: {e}")
-            return "true" in response.lower()
+            clean = response.strip()
+            if clean.startswith("```"):
+                clean = clean.split("```")[1].strip()
+                if clean.startswith("json"):
+                    clean = clean[4:].strip()
+
+            data = json.loads(clean)
+            results_list = data.get("results", [])
+
+            if len(results_list) != len(constraints):
+                logger.warning(f"Judge returned {len(results_list)} results for {len(constraints)} constraints. Defaulting to False.")
+                return {c_id: False for c_id, _, _ in constraints}
+
+            return {c_id: bool(r) for (c_id, _, _), r in zip(constraints, results_list)}
+
+        except (json.JSONDecodeError, KeyError) as e:
+            logger.warning(f"Failed to parse judge response: {e}. Raw: {response[:200]}")
+            return {c_id: False for c_id, _, _ in constraints}
 
     async def evaluate(self, prompt: Prompt, output: GeneratedOutput) -> EvaluationResult:
-        logger.info(f"Starting evaluation for prompt {prompt.id}")
-        constraint_results = {}
-        total_constraints = 0
-        satisfied_constraints = 0
+        logger.debug(f"Evaluating {prompt.id} for {output.model_name}")
+        constraint_results: dict[str, bool] = {}
+        length_deviations: dict[str, float] = {}
+        subjective_batch: list[tuple[str, str, str]] = []
 
         for task in prompt.sub_tasks:
             for constraint in task.constraints:
-                total_constraints += 1
                 c_id = constraint.id
-                
-                success = None
-                
-                # Route based on deterministic vs subjective
-                if constraint.type == ConstraintType.FORMAT:
-                    success = self.evaluate_format_constraint(output.output_text, constraint.description)
-                elif constraint.type == ConstraintType.LENGTH:
-                    success = self.evaluate_length_constraint(output.output_text, constraint.description)
-                
-                # If deterministic evaluator returns None, it means fallback is needed
-                if success is None:
-                    success = await self.evaluate_subjective_constraint(output.output_text, constraint.description, constraint.type.value)
-                
-                constraint_results[c_id] = success
-                if success:
-                    satisfied_constraints += 1
 
-        rfr = satisfied_constraints / total_constraints if total_constraints > 0 else 1.0
+                if constraint.type == ConstraintType.FORMAT:
+                    result = self.evaluate_format_constraint(output.output_text, constraint.description)
+                    if result is not None:
+                        constraint_results[c_id] = result
+                        continue
+
+                elif constraint.type == ConstraintType.LENGTH:
+                    passed, deviation = self.evaluate_length_constraint(output.output_text, constraint.description)
+                    if passed is not None:
+                        constraint_results[c_id] = passed
+                        if deviation is not None:
+                            length_deviations[c_id] = deviation
+                        continue
+
+                subjective_batch.append((c_id, constraint.type.value, constraint.description))
+
+        if subjective_batch:
+            batch_results = await self.batch_evaluate_subjective(
+                output.output_text, subjective_batch, prompt.full_prompt()
+            )
+            constraint_results.update(batch_results)
+
+        total = len(constraint_results)
+        satisfied = sum(1 for v in constraint_results.values() if v)
+        rfr = satisfied / total if total > 0 else 1.0
         ifr = 1.0 if rfr == 1.0 else 0.0
-        
-        logger.info(f"Completed evaluation for prompt {prompt.id}: RFR={rfr:.2f}, IFR={ifr:.2f}")
+
+        logger.debug(f"{prompt.id} [{output.model_name}]: RFR={rfr:.2f}, IFR={ifr:.2f}")
 
         return EvaluationResult(
             prompt_id=prompt.id,
             model_name=output.model_name,
             rfr_score=rfr,
             ifr_score=ifr,
-            constraint_results=constraint_results
+            constraint_results=constraint_results,
+            length_deviations=length_deviations,
         )

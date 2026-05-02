@@ -24,12 +24,26 @@ class Prompt(BaseModel):
     id: str = Field(..., description="Unique identifier for the prompt")
     language: str = Field(default="English", description="Language of the prompt")
     core_task_category: str = Field(..., description="The core task category (e.g., Classification, Text Generation)")
-    instruction: str = Field(..., description="The main overarching instruction")
+    instruction: Optional[str] = Field(None, description="The main overarching instruction (old schema)")
+    base_information: Optional[str] = Field(None, description="Background context/reading material (new schema)")
     sub_tasks: List[SubTask] = Field(default_factory=list, description="List of individual subtasks")
-    reading_materials: Optional[str] = Field(None, description="Any base text or dialogue provided as context")
-    
+    reading_materials: Optional[str] = Field(None, description="Any base text or dialogue provided as context (old schema)")
+
     cultural_accessibility_labels: List[str] = Field(default_factory=list, description="Labels for cultural anchors")
     density_level: str = Field(..., description="Low, Medium, or High density based on constraints")
+
+    def full_prompt(self) -> str:
+        """Build the complete prompt text to send to a model, handling both schema versions."""
+        context = self.base_information or self.reading_materials or ""
+        if self.instruction:
+            # Old schema: single top-level instruction (reading_materials already embedded in most cases)
+            return self.instruction
+        else:
+            # New schema: base_information + each sub-task instruction
+            tasks = "\n\n".join(
+                f"{t.instruction}" for t in self.sub_tasks
+            )
+            return f"{context}\n\n{tasks}".strip() if context else tasks
 
 class GeneratedOutput(BaseModel):
     prompt_id: str
@@ -42,6 +56,7 @@ class EvaluationResult(BaseModel):
     rfr_score: float = Field(..., description="Requirement Following Ratio")
     ifr_score: float = Field(..., description="Instruction Following Ratio (1.0 if all met, 0.0 otherwise)")
     constraint_results: Dict[str, bool] = Field(..., description="Mapping of constraint id to boolean success")
+    length_deviations: Dict[str, float] = Field(default_factory=dict, description="Mapping of constraint id to deviation ratio for length constraints")
 
 class ValidationResult(BaseModel):
     is_valid: bool = Field(..., description="Whether the prompt is valid")

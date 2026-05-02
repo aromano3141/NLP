@@ -1,0 +1,287 @@
+[
+    {
+        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28",
+        "language": "English",
+        "core_task_category": "Reasoning and Logic",
+        "base_information": "The Chronos Paradox: The Interconnectedness of the Aethelgard Archives\n\nIn the floating city of Aethelgard, time is not linear but architectural. The city is divided into four concentric rings: the Outer Rim, the Inner Circle, the Spire, and the Foundation. Each ring operates on a different temporal frequency.\n\nThe Outer Rim exists in \"Slow-Time,\" where one hour equals one day in the other rings. The Inner Circle exists in \"Fast-Time,\" where one day equals one hour in the other rings. The Spire exists in \"Static-Time,\" where no time passes at all, though residents can move and speak. The Foundation exists in \"Reverse-Time,\" where events occur from future to past.\n\nTo maintain stability, the High Archivists follow the Law of Temporal Equilibrium. This law dictates that for every hour spent in the Inner Circle, a citizen must spend exactly two hours in the Outer Rim to offset the chronological drift. However, if a citizen enters the Spire, the drift is frozen, and the equilibrium requirement is paused.\n\nConsider the case of Archivist Elara. Elara began her day in the Outer Rim for four hours. She then traveled to the Inner Circle for two hours. After this, she spent an indeterminate amount of time in the Spire. Finally, she descended to the Foundation, where she spent three hours witnessing the \"un-happening\" of the city's Great Fire.\n\nThe Archivists use a specific counting system for \"Temporal Debt.\" Debt is accrued when the Law of Equilibrium is violated. If a person spends more time in Fast-Time (Inner Circle) than the required offset in Slow-Time (Outer Rim), they accrue one unit of Debt for every missing hour of offset. \n\nFurthermore, the Foundation operates on a \"Symmetry Principle\": any time spent in Reverse-Time subtracts from the total accumulated Temporal Debt, but only at a ratio of 2:1 (two hours in the Foundation removes one unit of Debt).\n\nThe city's clock, the Chronos Gear, only advances when the net temporal drift of the entire population is zero. If the population is in a state of net Debt, the gear rotates counter-clockwise, causing the city to physically descend toward the ocean. If the population is in a state of net Credit (excessive Slow-Time), the gear rotates clockwise, lifting the city higher into the atmosphere.",
+        "sub_tasks": [
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_0",
+                "instruction": "Task 1: Temporal Debt Calculation\nCalculate the exact amount of Temporal Debt Archivist Elara accrued based on her time spent in the Outer Rim and the Inner Circle, applying the Law of Temporal Equilibrium (which requires two hours in the Outer Rim for every one hour in the Inner Circle).",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_0_c_0",
+                        "type": "Content Constraint",
+                        "description": "The calculation must apply a 2:1 ratio where 2 hours in the Outer Rim offset 1 hour in the Inner Circle to determine the final debt.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_1",
+                "instruction": "Task 2: Reverse-Time Offset Analysis\nDetermine the remaining Temporal Debt for Archivist Elara after she spent three hours in the Foundation, applying the Symmetry Principle ratio of 2:1 (two hours in Reverse-Time removes one unit of Debt).",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_1_c_0",
+                        "type": "Content Constraint",
+                        "description": "The final debt must be reduced by exactly 1.5 units, based on the 2:1 Symmetry Principle applied to 3 hours spent in the Foundation.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_2",
+                "instruction": "Task 3: Temporal Frequency Conversion\nConvert Elara's total residence time in the Inner Circle (two hours) into the equivalent amount of time that would have passed for an observer located in the Outer Rim, based on the provided temporal frequency ratios.",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_2_c_0",
+                        "type": "Content Constraint",
+                        "description": "The output must convert 2 hours of Inner Circle time into Outer Rim time using the specific temporal frequency ratios provided in the source text.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_3",
+                "instruction": "Task 4: Equilibrium Violation Assessment\nDetermine if Archivist Elara's stay in the Spire affected her Temporal Debt calculations, citing the specific rule regarding the \"frozen drift\" in Static-Time.",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_3_c_0",
+                        "type": "Content Constraint",
+                        "description": "The response must explicitly cite the specific rule regarding \"frozen drift\" in Static-Time to justify the impact (or lack thereof) of the Spire stay.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_4",
+                "instruction": "Task 5: Chronos Gear Directional Prediction\nPredict the direction of the Chronos Gear's rotation (clockwise, counter-clockwise, or stationary) based on Elara's final state of Debt or Credit after her journey through all four rings.",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_4_c_0",
+                        "type": "Content Constraint",
+                        "description": "The prediction must be limited to one of three specific values: \"clockwise\", \"counter-clockwise\", or \"stationary\".",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_5",
+                "instruction": "Task 6: City Elevation Logic Deduction\nDeduce whether the city of Aethelgard physically descended toward the ocean or lifted higher into the atmosphere as a result of Elara's specific movements, explaining the logical link between her net temporal drift and the city's altitude.",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_5_c_0",
+                        "type": "Content Constraint",
+                        "description": "The conclusion must establish a direct logical link between the calculated net temporal drift and the specific direction of Aethelgard's altitude change (descending or lifting).",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_6",
+                "instruction": "Task 7: Hypothetical Equilibrium Scenario Construction\nCalculate the exact number of additional hours Elara would have needed to spend in the Outer Rim—prior to entering the Foundation—to reach a state of zero Temporal Debt without utilizing the Symmetry Principle.",
+                "constraints": [
+                    {
+                        "id": "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_6_c_0",
+                        "type": "Content Constraint",
+                        "description": "The calculation for zero debt must be performed without applying the Symmetry Principle (Reverse-Time) logic.",
+                        "metadata": {}
+                    }
+                ]
+            }
+        ],
+        "cultural_accessibility_labels": [],
+        "density_level": "Low"
+    },
+    {
+        "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_ch",
+        "language": "Chinese",
+        "core_task_category": "Reasoning and Logic",
+        "base_information": "Chronos图书馆的档案中记载有《时间位移法则》，这是一套关于时间旅行历史学家的悖论规则。为维持时间线的稳定，所有特工必须遵守以下约束：\n\n首先，因果对称原理规定，任何从未来带入过去的物体必须用目标时代质量相等且具有同等文化意义的物体进行替换，以防止引力异常。其次，非干预规则规定，特工不能与自己的祖先互动；但如果与远亲互动且该远亲不知晓特工未来身份，则被允许。\n\n第三，年代顺序约束要求跳跃必须按世纪递减的顺序进行。例如，特工可以从2024年跳到1924年，再跳到1824年，但不能在没有“重置令牌”的情况下从1924年跳回2024年。重置令牌仅在特工成功记录了“固定点”事件后授予。固定点事件被定义为在所有已观测的平行时间线中保持不变的历史事件。\n\n最后，悖论缓冲区允许每次旅行进行一次“修正行为”。修正行为是对次要事件的有意更改，但不改变固定点的结果。如果特工在返回现在之前执行第二次修正行为，将面临“时间抹除”，即其存在会被新创建的时间线所覆盖。\n\n当前，特工Elara身处1750年。她从2100年带来了一台数字录音机（质量：200克）。她已经记录了1751年的大火，这是一项固定点。她此前曾将一颗河床石子移走以拯救一种稀有昆虫，这被视为她唯一允许的修正行为。她希望前往1650年调查一部失落的手稿，但在此之前，她必须决定如何处理数字录音机，以及是否冒险移动第二块石头以防止当地洪水。",
+        "sub_tasks": [
+            {
+                "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_0",
+                "instruction": "任务 1：逻辑合规性分析（因果对称）\n分析特工Elara 当前在因果对称原理下的状态。明确她必须在数字录音机方面满足的具体要求，并列出替换物体必须满足的两项标准。",
+                "constraints": [
+                    {
+                        "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_0_c_0",
+                        "type": "Content Constraint",
+                        "description": "输出必须明确说明数字录音机的具体要求以及替换物体的两项标准。（内容约束）",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_1",
+                "instruction": "任务 2：演绎许可验证（年代顺序）\n判断特工Elara 是否被允许依据年代顺序约束从当前的1750年跳到1650年。请通过引用关于跳跃顺序的具体规则提供逻辑论证。",
+                "constraints": [
+                    {
+                        "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_1_c_0",
+                        "type": "Content Constraint",
+                        "description": "回复必须包含引用具体跳跃顺序规则的逻辑论证。（内容约束）",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_2",
+                "instruction": "任务 3：条件访问评估（重置令牌）\n评估特工Elara 是否依据提供的文本当前有资格获得“重置令牌”。你的分析必须将“固定点”事件的定义与Elara 在1751年所做的具体行动关联，以判断她是否拥有向前跳跃的授权。",
+                "constraints": [
+                    {
+                        "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_2_c_0",
+                        "type": "Content Constraint",
+                        "description": "评估必须在“固定点”事件定义与Elara 1751年具体行动之间建立直接的逻辑关联。（内容约束）",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_3",
+                "instruction": "任务 4：风险评估与预测（悖论缓冲区）\n预测如果特工Elara 决定移动第二块石头以防止当地洪水，她将面临的具体后果。依据当前已执行的“修正行为”次数以及悖论缓冲区规则进行推理。",
+                "constraints": [
+                    {
+                        "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_3_c_0",
+                        "type": "Content Constraint",
+                        "description": "后果的预测必须依据悖论缓冲区规则中对“修正行为”次数的定义进行推导。（内容约束）",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_4",
+                "instruction": "任务 5：多约束策略制定（行动计划）\n制定一份分步骤检查清单，列出特工Elara 为成功从1750年过渡到1650年而必须完成的所有操作，确保不违反四条法律。清单必须明确涉及数字录音机、世代跨越以及对进一步环境干预的限制。",
+                "constraints": [
+                    {
+                        "id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_4_c_0",
+                        "type": "Format Constraint",
+                        "description": "回复必须以分步骤检查清单的形式呈现，覆盖数字录音机、世代跨越以及环境干预限制。（格式约束）",
+                        "metadata": {}
+                    }
+                ]
+            }
+        ],
+        "cultural_accessibility_labels": [],
+        "density_level": "Low"
+    },
+    {
+        "id": "8f72961c-87f4-410f-bb4b-b417292d3517_ar",
+        "language": "Arabic",
+        "core_task_category": "Reasoning and Logic",
+        "base_information": "الأرشيف العظيم لأثيلغارد مُنظم وفق سلسلة من الأوامر المتناقضة التي وضعها أمين المكتبة الأول. للتنقل في الأرشيف واستخراج مخطوطة معينة، يجب الالتزام بالقيود اللوجستية التالية:\n\nأولاً، ينقسم الأرشيف إلى ثلاثة أجنحة: الجناح الشمسي، الجناح القمري، والجناح النجمي. يحتوي الجناح الشمسي على جميع النصوص المتعلقة بالفلسفة الطبيعية والكيمياء. يحتوي الجناح القمري على جميع النصوص المتعلقة بالتاريخ والقانون. يحتوي الجناح النجمي على جميع النصوص المتعلقة بالفلك واللاهوت. ومع ذلك، أي نص يتناول كلًّا من الفلسفة الطبيعية والفلك يُحفظ في الجناح القمري بغض النظر عن موضوعه الأساسي.\n\nثانيًا، مستويات الوصول مُدرجة بصرامة. المستوى 1 (الأتريوم) مفتوح للجميع. المستوى 2 (الصالة) يتطلّب مفتاحًا فضيًا. المستوى 3 (القبو) يتطلّب مفتاحًا ذهبيًا. العالم الحامل لمفتاح ذهبي يمتلك تلقائيًا صلاحيات مفتاح فضي.\n\nثالثًا، \"قاعدة الإزاحة\" تحكم الموقع الفيزيائي للكتب. إذا صُنّف الكتاب كـ \"محظور\"، يُنقل إلى الجناح التالي إلى الأمام (الشمسي → القمري → النجمي → الشمسي). إذا صُنّف كـ \"مقدس\"، يُنقل إلى الجناح السابق إلى الخلف (الشمسي → النجمي → القمري → الشمسي). إذا كان الكتاب \"محظورًا\" و\"مقدسًا\" معًا، يبقى في جناحه الأصلي.\n\nرابعًا، \"قفل الزمن\" يقرّر أن القبو لا يُفتح إلا أثناء كسوف القمر، ما لم يكن العالم يحمل قرص الزمن، الذي يسمح بالدخول إلى القبو في أي وقت بشرط ألا يكون موجودًا حاليًا في الجناح الشمسي.\n\nالآن، العالِمة إلارا تمتلك مفتاحًا ذهبيًا وقرص زمن. هي تبحث عن \"مخطوطة العناصر السماوية\"، نصّ يغطي كلًّا من الفلسفة الطبيعية والفلك. تُصنّف المخطوطة كـ \"محظور\" ولكن ليست \"مقدسة\". إلارا تقف حاليًا في الجناح الشمسي.",
+        "sub_tasks": [
+            {
+                "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_0",
+                "instruction": "المهمة 1: تحديد الموقع الفعلي للجناح\nحدد الجناح الفيزيائي النهائي الذي تُخزن فيه \"مخطوطة العناصر السماوية\" الآن. للقيام بذلك، حدّد أولًا الجناح الأولي بناءً على قيود الموضوع، ثم طبّق \"قاعدة الإزاحة\" بناءً على تصنيف الكتاب كـ \"محظور\" و\"ليس مقدسًا\".",
+                "constraints": [
+                    {
+                        "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_0_c_0",
+                        "type": "Content Constraint",
+                        "description": "يجب أن يذكر الناتج النهائي صراحةً الجناح الأولي، تطبيق \"قاعدة الإزاحة\"، والجناح الفيزيائي النهائي المحدد.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_1",
+                "instruction": "المهمة 2: تحليل أهلية الوصول\nقيّم ما إذا كانت العالِمة إلارا تمتلك حاليًا الاعتماديات اللازمة (مستوى المفتاح) لدخول القبو (المستوى 3). يجب أن يشرح تحليلك العلاقة بين المفتاح الذهبي والمفتاح الفضي كما هو مُعرّف في مستويات الوصول المتدرجة.",
+                "constraints": [
+                    {
+                        "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_1_c_0",
+                        "type": "Content Constraint",
+                        "description": "على التحليل أن يتضمن شرحًا محددًا للتسلسل الهرمي بين المفتاح الذهبي والمفتاح الفضي بالنسبة للوصول إلى المستوى 3.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_2",
+                "instruction": "المهمة 3: التحقق الزمني من إمكانية الدخول\nحدّد ما إذا كان بإمكان إلارا دخول القبو في هذه اللحظة بالذات. عليك أن تبرهن عبر \"قفل الزمن\" من خلال فحص حالة كسوف القمر الحالية والمتطلبات الخاصة باستخدام قرص الزمن، بما في ذلك الموقع الفيزيائي الحالي لإلارا.",
+                "constraints": [
+                    {
+                        "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_2_c_0",
+                        "type": "Content Constraint",
+                        "description": "يجب أن يتضمن التبرير تحققًا صريحًا من ثلاثة شروط: حالة كسوف القمر، متطلبات قرص الزمن، وموقع إلارا الحالي.",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_3",
+                "instruction": "المهمة 4: سرد خطوات تحسين المسار\nحدّد تسلسل الإجراءات التي يجب أن تتبعها إلارا لاستعادة \"مخطوطة العناصر السماوية\" بنجاح. يتطلب ذلك حساب الموقع النهائي للكتاب، تحديد مستوى الوصول المطلوب لذلك الموقع، وتحديد ما إذا كان عليها أولًا تغيير جناحها الفيزيائي لتلبية شروط قرص الزمن قبل دخول القبو.",
+                "constraints": [
+                    {
+                        "id": "8f72961c-87f4-410f-bb4b-b417292d3517_task_3_c_0",
+                        "type": "Format Constraint",
+                        "description": "يجب أن يكون الرد مُنظمًا كقائمة متسلسلة من الإجراءات، مرتبة بحسب الاعتماد المنطقي بين الموقع، مستوى الوصول، والحركة الفزيائية.",
+                        "metadata": {}
+                    }
+                ]
+            }
+        ],
+        "cultural_accessibility_labels": [
+            "First Librarian -> أمين المكتبة الأول",
+            "Solar Wing -> الجناح الشمسي",
+            "Lunar Wing -> الجناح القمري",
+            "Stellar Wing -> الجناح النجمي",
+            "Natural Philosophy and Alchemy -> الفلسفة الطبيعية والكيمياء",
+            "History and Law -> التاريخ والقانون",
+            "Astronomy and Theology -> الفلك واللاهوت",
+            "Forbidden -> محظور",
+            "Sacred -> مقدس",
+            "Silver Key -> مفتاح فضي",
+            "Gold Key -> مفتاح ذهبي",
+            "Chronos Dial -> قرص الزمن",
+            "Vault -> القبو",
+            "Atrium -> الأتريوم",
+            "Gallery -> الصالة",
+            "lunar eclipse -> كسوف القمر"
+        ],
+        "density_level": "Low"
+    },
+    {
+        "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_hi",
+        "language": "Hindi",
+        "core_task_category": "Reasoning and Logic",
+        "base_information": "क्रोनोस विरोधाभास: समयिक कारणता में अध्ययन\n\n\"कारणात्मक लूप डायनेमिक्स\" के सैद्धांतिक ढाँचे में दादाजी विरोधाभास की अवधारणा अक्सर नोविकॉव स्व-समरूपता सिद्धांत द्वारा प्रतिस्थापित की जाती है। यह सिद्धांत यह प्रस्तावित करता है कि समय यात्री द्वारा अतीत को बदलने के लिए लिया गया कोई भी कार्य वास्तव में वही कार्य होगा जो अतीत को ठीक उसी प्रकार से घटित होने को सुनिश्चित करता है जैसा कि वह दर्ज किया गया है।\n\n\"खोया हुआ सिम्फनी\" के केस पर विचार करें। 1922 में, संगीतविद् डॉ. एरिस थॉर्न ने एक पुरानी, हस्तलिखित स्कोर खोजी, जो एक अनाम 18वीं सदी के संगीतकार की सिम्फनी थी। यह रचना क्रांतिकारी थी, जिसमें ऐसी हार्मोनिक संरचनाएँ थीं जो आगे के सौ वर्षों में ही आविष्कृत होतीं। थॉर्न ने अपना पूरा करियर इस रचना का अध्ययन करने में बिताया, अंततः इस विशेष, रहस्यमय संगीत में विश्व के प्रमुख विशेषज्ञ बन गए।\n\n2024 में, थॉर्न, अब एक वृद्ध व्यक्ति, एक प्रोटोटाइप समय विस्थापन उपकरण तक पहुँच प्राप्त कर गए। जीवन भर के इस जुनून से प्रेरित कि वह संगीतकार से मिलें, उन्होंने 1745 में यात्रा की। वहाँ पहुँचकर उन्होंने देखा कि उस युग का संगीत परिदृश्य स्थिर है। एक प्रेरणा और संगीत के मार्ग को प्रभावित करने की तीव्र इच्छा में थॉर्न ने वही स्कोर, जिसे उन्होंने दशकों से अध्ययन किया था, उस युग के कागज़ पर प्रतिलिपि किया और इसे स्थानीय दरबार संगीतकार की मेज पर रख दिया, फिर वर्तमान में लौट आए।\n\nयह एक \"बूटस्ट्रैप विरोधाभास\" बनाता है। सिम्फनी मौजूद है क्योंकि थॉर्न ने इसे भविष्य से अतीत में लाया, पर थॉर्न को यह सिम्फनी तभी ज्ञात हुई जब उन्होंने इसे अतीत में पाया। सूचना—स्वयं संगीत नोट्स—का कोई मूल बिंदु नहीं है; यह एक बंद लूप में मौजूद है।\n\nहालाँकि, जब हम \"परिवर्तनीय विचलन सिद्धान्त\" को प्रस्तुत करते हैं तो एक द्वितीयक जटिलता उत्पन्न होती है। यह सिद्धान्त सुझाव देता है कि भौतिक वस्तु (कागज़) लूप में रह सकती है, पर कार्यकर्ता का *इरादा* बदल सकता है। यदि थॉर्न ने 1745 में सिम्फनी को छोड़ने से पहले एक नोट बदलने का निर्णय लिया होता, तो वह अतीत को बदल नहीं रहा होता, बल्कि एक \"कारणात्मक पिवट\" बना रहा होता। इस सिद्धान्त के अनुसार, 1922 में उन्होंने जो सिम्फनी खोजी थी, वह पहले से ही उस संशोधन को शामिल करती होती, क्योंकि टाइमलाइन ने उनके भविष्य के हस्तक्षेप को पहले ही समायोजित कर रखा था।\n\nतार्किक तनाव रैखिक धारणा और वृत्ताकार वास्तविकता के बीच के टकराव में निहित है। यदि प्रभाव कारण से पहले आता है, तो पारम्परिक एंट्रॉपी के नियम चुनौती पाते हैं, यह सुझाते हुए कि सूचना समयिक शून्य से स्वस्फूर्त रूप से उत्पन्न हो सकती है, बशर्ते लूप सुसंगत बना रहे।",
+        "sub_tasks": [
+            {
+                "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_0",
+                "instruction": "कार्य 1: बूटस्ट्रैप विरोधाभास का तर्कसंगत मानचित्रण\n\"खोया हुआ सिम्फनी\" की कथा का विश्लेषण करें और एक चरण-दर-चरण कारणात्मक श्रृंखला बनाएं जो सूचना की वृत्तीयता को दर्शाती हो। आपका उत्तर स्पष्ट रूप से 1922 में खोज → 2024 में यात्रा → 1745 में रखाई → 1922 में पुनः खोज क्रम में क्रमबद्ध सूची के रूप में प्रस्तुत होना चाहिए, तथा वह विशिष्ट बिंदु पहचानें जहाँ संगीत नोट्स की \"मूल\" तर्कसंगत रूप से मिटा दी गई है।",
+                "constraints": [
+                    {
+                        "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_0_c_0",
+                        "type": "Format Constraint",
+                        "description": "कारणात्मक श्रृंखला को क्रमिक सूची के रूप में प्रस्तुत किया जाना चाहिए, ठीक इस क्रम में: 1922 खोज → 2024 यात्रा → 1745 रखाई → 1922 खोज। (फ़ॉर्मेट प्रतिबंध)",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_1",
+                "instruction": "कार्य 2: कालिक सिद्धान्तों की तुलनात्मक विश्लेषण\nपाठ में प्रस्तुत नोविकॉव स्व-समरूपता सिद्धांत और परिवर्तनीय विचलन सिद्धान्त की तुलना करें। निर्धारित करें कि परिवर्तनीय विचलन सिद्धान्त में वर्णित \"कारणात्मक पिवट\" नोविकॉव सिद्धान्त के मूल सिद्धान्त (कि कार्य अतीत को वही होने सुनिश्चित करते हैं) के विरुद्ध विरोध करता है या उसे समर्थन देता है। पाठ में संशोधित नोट के वर्णन के आधार पर अपने निष्कर्ष की तर्कसंगत व्याख्या प्रदान करें।",
+                "constraints": [
+                    {
+                        "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_1_c_0",
+                        "type": "Content Constraint",
+                        "description": "प्रतिक्रिया में एक निर्णायक कथन (विरोध करता है या समर्थन देता है) शामिल होना चाहिए जो \"कारणात्मक पिवट\" और नोविकॉव सिद्धान्त के बीच संबंध को स्पष्ट करे। (सामग्री प्रतिबंध)",
+                        "metadata": {}
+                    }
+                ]
+            },
+            {
+                "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_2",
+                "instruction": "कार्य 3: सूचना एंट्रॉपी पर तर्कसंगत मूल्यांकन\nअंतिम अनुच्छेद में कहा गया है कि \"सूचना समयिक शून्य से स्वस्फूर्त रूप से उत्पन्न हो सकती है,\" इस दावे की तार्किक संगति का मूल्यांकन करें। समझाएँ कि कैसे सिम्फनी के अस्तित्व से पारम्परिक एंट्रॉपी के नियमों को चुनौती मिलती है, विशेष रूप से कागज़ की भौतिक आयु और हार्मोनिक संरचनाओं के मूल के बीच के विरोधाभास पर ध्यान केंद्रित करते हुए।",
+                "constraints": [
+                    {
+                        "id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_2_c_0",
+                        "type": "Content Constraint",
+                        "description": "मूल्यांकन को विशेष रूप से कागज़ की भौतिक आयु और हार्मोनिक संरचनाओं के मूल के बीच के विरोधाभास को संबोधित करना चाहिए। (सामग्री प्रतिबंध)",
+                        "metadata": {}
+                    }
+                ]
+            }
+        ],
+        "cultural_accessibility_labels": [],
+        "density_level": "Low"
+    }
+]

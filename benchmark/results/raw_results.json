@@ -1,0 +1,230 @@
+{
+  "google/gemini-2.5-flash-lite": [
+    {
+      "prompt_id": "5b583a6a-696a-4a56-8af3-bff05fe57f28",
+      "model_name": "google/gemini-2.5-flash-lite",
+      "rfr_score": 0.5714285714285714,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_0_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_1_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_2_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_3_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_4_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_5_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_6_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_ch",
+      "model_name": "google/gemini-2.5-flash-lite",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_0_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_1_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_2_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_3_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_4_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "8f72961c-87f4-410f-bb4b-b417292d3517_ar",
+      "model_name": "google/gemini-2.5-flash-lite",
+      "rfr_score": 0.75,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_0_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_1_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_2_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_3_c_0": false
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_hi",
+      "model_name": "google/gemini-2.5-flash-lite",
+      "rfr_score": 0.3333333333333333,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_0_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_1_c_0": false,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_2_c_0": false
+      },
+      "length_deviations": {}
+    }
+  ],
+  "openai/gpt-4o-mini": [
+    {
+      "prompt_id": "5b583a6a-696a-4a56-8af3-bff05fe57f28",
+      "model_name": "openai/gpt-4o-mini",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_0_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_1_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_2_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_3_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_4_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_5_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_6_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_ch",
+      "model_name": "openai/gpt-4o-mini",
+      "rfr_score": 0.8,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_0_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_1_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_2_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_3_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_4_c_0": false
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "8f72961c-87f4-410f-bb4b-b417292d3517_ar",
+      "model_name": "openai/gpt-4o-mini",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_0_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_1_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_2_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_3_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_hi",
+      "model_name": "openai/gpt-4o-mini",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_0_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_1_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_2_c_0": true
+      },
+      "length_deviations": {}
+    }
+  ],
+  "qwen/qwen3.5-flash-02-23": [
+    {
+      "prompt_id": "5b583a6a-696a-4a56-8af3-bff05fe57f28",
+      "model_name": "qwen/qwen3.5-flash-02-23",
+      "rfr_score": 0.8571428571428571,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_0_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_1_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_2_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_3_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_4_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_5_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_6_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_ch",
+      "model_name": "qwen/qwen3.5-flash-02-23",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_0_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_1_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_2_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_3_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_4_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "8f72961c-87f4-410f-bb4b-b417292d3517_ar",
+      "model_name": "qwen/qwen3.5-flash-02-23",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_0_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_1_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_2_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_3_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_hi",
+      "model_name": "qwen/qwen3.5-flash-02-23",
+      "rfr_score": 0.6666666666666666,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_0_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_1_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_2_c_0": false
+      },
+      "length_deviations": {}
+    }
+  ],
+  "meta-llama/llama-4-scout": [
+    {
+      "prompt_id": "5b583a6a-696a-4a56-8af3-bff05fe57f28",
+      "model_name": "meta-llama/llama-4-scout",
+      "rfr_score": 0.42857142857142855,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_0_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_1_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_2_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_3_c_0": true,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_4_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_5_c_0": false,
+        "5b583a6a-696a-4a56-8af3-bff05fe57f28_task_6_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "d4a35fef-4a83-4efa-bf29-0b29f22804aa_ch",
+      "model_name": "meta-llama/llama-4-scout",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_0_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_1_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_2_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_3_c_0": true,
+        "d4a35fef-4a83-4efa-bf29-0b29f22804aa_task_4_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "8f72961c-87f4-410f-bb4b-b417292d3517_ar",
+      "model_name": "meta-llama/llama-4-scout",
+      "rfr_score": 0.75,
+      "ifr_score": 0.0,
+      "constraint_results": {
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_0_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_1_c_0": true,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_2_c_0": false,
+        "8f72961c-87f4-410f-bb4b-b417292d3517_task_3_c_0": true
+      },
+      "length_deviations": {}
+    },
+    {
+      "prompt_id": "63c04b18-a665-4abf-af0a-dcdcb36d5e46_hi",
+      "model_name": "meta-llama/llama-4-scout",
+      "rfr_score": 1.0,
+      "ifr_score": 1.0,
+      "constraint_results": {
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_0_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_1_c_0": true,
+        "63c04b18-a665-4abf-af0a-dcdcb36d5e46_task_2_c_0": true
+      },
+      "length_deviations": {}
+    }
+  ]
+}
