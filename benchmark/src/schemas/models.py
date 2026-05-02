@@ -24,10 +24,8 @@ class Prompt(BaseModel):
     id: str = Field(..., description="Unique identifier for the prompt")
     language: str = Field(default="English", description="Language of the prompt")
     core_task_category: str = Field(..., description="The core task category (e.g., Classification, Text Generation)")
-    instruction: str = Field(..., description="The main overarching instruction")
-    sub_tasks: List[SubTask] = Field(default_factory=list, description="List of individual subtasks")
-    reading_materials: Optional[str] = Field(None, description="Any base text or dialogue provided as context")
-    
+    base_information: str = Field(..., description="The main overarching instruction")
+    sub_tasks: List[SubTask] = Field(default_factory=list, description="List of individual subtasks")    
     cultural_accessibility_labels: List[str] = Field(default_factory=list, description="Labels for cultural anchors")
     density_level: str = Field(..., description="Low, Medium, or High density based on constraints")
 
@@ -58,8 +56,7 @@ class LocalizationSubTask(BaseModel):
     constraints: List[LocalizationConstraint] = Field(default_factory=list)
 
 class LocalizationSchema(BaseModel):
-    localized_base_text: Optional[str] = None
-    localized_instruction: str
+    localized_information: str
     cultural_accessibility_labels: List[str] = Field(default_factory=list)
     sub_tasks: List[LocalizationSubTask] = Field(default_factory=list)
 
@@ -72,6 +69,6 @@ class ParsedSubTask(BaseModel):
     constraints: List[ParsedConstraint] = Field(default_factory=list)
 
 class ParsedPromptData(BaseModel):
-    instruction: str
+    base_information: str
     sub_tasks: List[ParsedSubTask] = Field(default_factory=list)
 

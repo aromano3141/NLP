@@ -1,11 +1,11 @@
 CORE_TASK_CATEGORIES = [
+    "Reasoning and Logic",
+    "Language Style",
+    "Programming",
+    "Dialogue System",
     "Classification",
     "Information Extraction",
     "Text Generation",
-    "Dialogue System",
-    "Reasoning and Logic",
-    "Language Style",
-    "Programming"
 ]
 
 CONSTRAINT_DIMENSIONS = {
@@ -43,7 +43,7 @@ LANGUAGES = ["English", "Chinese", "Arabic", "Hindi"]
 
 LANGUAGE_DISTRIBUTION = {
     "English": 3,
-    "Chinese": 2,
-    "Arabic": 2,
-    "Hindi": 2
+    "Chinese": 3,
+    "Arabic": 3,
+    "Hindi": 3
 }

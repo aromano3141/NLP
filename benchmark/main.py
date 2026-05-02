@@ -10,14 +10,7 @@ from src.schemas.models import GeneratedOutput
 async def test_pipeline():
     print("Starting pipeline test...")
     
-    # Check API keys
-    if not os.getenv("OPENAI_API_KEY") and not os.getenv("DEEPSEEK_API_KEY"):
-        print("Please set OPENAI_API_KEY or DEEPSEEK_API_KEY in .env")
-        # For testing purposes, we can use a mock or require the user to set it
-        print("Note: The pipeline will fail if no valid API key is configured.")
-
-    # We'll use gpt-4o as default if available
-    generator = SeedGenerator(model_name="gpt-4o")
+    generator = SeedGenerator(model_name="gemma4:31b-cloud")
     
     print("\n[1] Generating Seed Prompt (Category: Classification, Density: Low)...")
     seed_prompt = await generator.generate_seed_prompt("Classification", density="Low")
@@ -29,7 +22,7 @@ async def test_pipeline():
             print(f"    - [{c.type.value}] {c.description}")
 
     print("\n[2] Validating Seed Prompt...")
-    validator = InstructionValidator(model_name="gpt-4o")
+    validator = InstructionValidator(model_name="deepseek-v4-flash:cloud")
     is_valid, reason = await validator.extract_and_verify(seed_prompt)
     print(f"Is Valid: {is_valid}, Reason: {reason}")
     
@@ -38,7 +31,7 @@ async def test_pipeline():
         return
 
     print("\n[3] Localizing Prompt to Hindi...")
-    localizer = LocalizationPipeline(target_languages=["Hindi"], model_name="gpt-4o")
+    localizer = LocalizationPipeline(target_languages=["Hindi"], model_name="gpt-oss:120b-cloud")
     localized_prompts = await localizer.run_pipeline(seed_prompt)
     if not localized_prompts:
         print("Localization failed.")

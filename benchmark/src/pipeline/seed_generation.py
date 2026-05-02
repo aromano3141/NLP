@@ -28,7 +28,7 @@ class SeedGenerator:
         
         Output ONLY the text or dialogue, nothing else.
         """
-        return await async_generate_text(prompt, model=self.model_name, system_prompt=system_prompt)
+        return await async_generate_text(prompt, model=self.model_name, system_prompt=system_prompt, json_mode=True)
 
     async def expand_tasks(self, base_text: str, category: str, num_tasks: int = 3) -> str:
         """Step 2: Task Expansion based on the base text."""
@@ -58,7 +58,7 @@ class SeedGenerator:
         
         -output-:
         """
-        return await async_generate_text(prompt, model=self.model_name, system_prompt=system_prompt)
+        return await async_generate_text(prompt, model=self.model_name, system_prompt=system_prompt, json_mode=True)
 
     async def expand_constraints(self, tasks_text: str, density: str = "Medium") -> str:
         """Step 3: Constraint Expansion."""
@@ -68,7 +68,7 @@ class SeedGenerator:
             [f"- {key}: {', '.join(map(str, values))}" 
             for key, values in CONSTRAINT_DIMENSIONS.items()]
         )
-        num_constraints = {"Low": "1-4", "Medium": "4-5", "High": "6-8"}[density]
+        num_constraints = {"Low": "1", "Medium": "2", "High": "3"}[density]
         
         prompt = f"""
         Modify the original constraint information for each instruction.
@@ -99,13 +99,13 @@ class SeedGenerator:
         
         -output-:
         """
-        return await async_generate_text(prompt, model=self.model_name, system_prompt=system_prompt)
+        return await async_generate_text(prompt, model=self.model_name, system_prompt=system_prompt, json_mode=True)
 
     async def generate_seed_prompt(self, category: str, density: str = "Medium") -> Optional[Prompt]:
         """Orchestrate the full pipeline to generate one seed prompt in English."""
         logger.info(f"Generating seed prompt for category '{category}' with density '{density}'")
         base_text = await self.generate_base_text(category)
-        random_num_tasks = random.randint(3, 10)
+        random_num_tasks = random.randint(3, 7)
         tasks_response = await self.expand_tasks(base_text, category,random_num_tasks)
         
         constraints_response = await self.expand_constraints(tasks_response, density)
@@ -116,7 +116,7 @@ class SeedGenerator:
         parsing_prompt = f"""
         You are given outputs from a multi-stage prompt generation pipeline.
 
-        STAGE 1 — BASE PROMPT (main instruction):
+        STAGE 1 — BASE INFORMATION:
         {base_text}
 
         STAGE 2 — EXPANDED SUBTASKS:
@@ -128,7 +128,7 @@ class SeedGenerator:
         Using ALL THREE stages, construct a structured JSON object.
 
         Rules:
-        - "instruction" must come from STAGE 1 (base prompt).
+        - "base_information" must come from STAGE 1 (base information).
         - "sub_tasks" must come from STAGE 2.
         - Constraints for each subtask must come from STAGE 3.
         - Preserve original wording.
@@ -138,7 +138,7 @@ class SeedGenerator:
 
         Schema:
         {{
-        "instruction": "<base prompt>",
+        "base_information": "<base information>",
         "sub_tasks": [
             {{
             "instruction": "<subtask>",
@@ -212,9 +212,8 @@ class SeedGenerator:
             id=prompt_id,
             language="English",
             core_task_category=category,
-            instruction=parsed_data.instruction,
+            base_information=base_text,
             sub_tasks=sub_tasks,
-            reading_materials=base_text,
             cultural_accessibility_labels=[],
             density_level=density
         )

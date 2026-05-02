@@ -70,8 +70,8 @@ class InstructionValidator:
 
         ---
 
-        Prompt Instruction:
-        {prompt.instruction}
+        Prompt Base Information:
+        {prompt.base_information}
         
         Sub-tasks and Constraints:
         """

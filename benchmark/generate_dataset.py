@@ -20,10 +20,8 @@ def save_dataset(dataset: list):
 
 async def generate_full_dataset():
     logger.info("Starting dataset generation process")
-    #generator = SeedGenerator(model_name="meta/Meta-Llama-3.1-405B-Instruct")
-    #validator = InstructionValidator(model_name="microsoft/Phi-4-mini-instruct")
-    generator = SeedGenerator(model_name="gemini-3.1-flash-lite-preview")
-    validator = InstructionValidator(model_name="gemini-2.5-flash-lite")
+    generator = SeedGenerator(model_name="gemma4:31b-cloud")
+    validator = InstructionValidator(model_name="deepseek-v4-flash:cloud")
     
     dataset = []
     generated_counts = {
@@ -47,7 +45,7 @@ async def generate_full_dataset():
         # If the target language isn't English, prepare the localizer
         localizer = None
         if target_lang != "English":
-            localizer = LocalizationPipeline(target_languages=[target_lang], model_name="gemini-3.1-flash-lite-preview")
+            localizer = LocalizationPipeline(target_languages=[target_lang], model_name="gpt-oss:120b-cloud")
             
         for category, cat_target in category_targets.items():
             logger.info(f"Generating {cat_target} {target_lang} prompts for category: {category}")

@@ -28,11 +28,8 @@ class LocalizationPipeline:
         3. Do NOT change the logical difficulty or the rigid constraints (e.g., word count limits, format requirements).
         4. If it's a Programming task, explicitly instruct the model to write the functional code/syntax in English, but output all docstrings/comments in {target_lang}.
         
-        Original English Instruction:
-        {english_prompt.instruction}
-        
-        Original Base Text:
-        {english_prompt.reading_materials or "N/A"}
+        Original English Base Information:
+        {english_prompt.base_information}
         
         Sub-tasks to translate:
         """
@@ -44,14 +41,13 @@ class LocalizationPipeline:
         prompt_text += f"""
         Return the localized content in JSON format matching the structure:
         {{
-            "localized_base_text": "...",
-            "localized_instruction": "...",
+            "localized_information": " Translated and culturally localized base information here ",
             "cultural_accessibility_labels": ["list", "of", "replaced", "anchors", "e.g., YouTube -> Hotstar"],
             "sub_tasks": [
                 {{
-                    "instruction": "...",
+                    "instruction": " Translated and culturally localized sub-task instruction here ",
                     "constraints": [
-                        {{"description": "..."}}
+                        {{"description": "Translated constraint description here"}}
                     ]
                 }}
             ]
@@ -107,8 +103,7 @@ class LocalizationPipeline:
         localized_prompt = english_prompt.model_copy(deep=True)
         localized_prompt.language = target_lang
         localized_prompt.id = f"{english_prompt.id}_{target_lang[:2].lower()}"
-        localized_prompt.reading_materials = parsed.localized_base_text
-        localized_prompt.instruction = parsed.localized_instruction
+        localized_prompt.base_information = parsed.localized_information
         localized_prompt.cultural_accessibility_labels = parsed.cultural_accessibility_labels
         
         for i, st in enumerate(localized_prompt.sub_tasks):
@@ -128,7 +123,7 @@ class LocalizationPipeline:
         prompt_text = f"""
         Back-translate the following {localized_prompt.language} text into English, and check if the core semantic intent and atomic constraints are preserved compared to strict benchmark standards.
         
-        Instruction: {localized_prompt.instruction}
+        Base Information: {localized_prompt.base_information}
         
         Reply ONLY with "PASS" if the logic and constraints are perfectly intact, or "FAIL: <reason>" if they are broken.
         """
