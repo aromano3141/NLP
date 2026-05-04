@@ -20,7 +20,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 MODELS = [
-    "google/gemini-2.5-flash-lite",
+    "google/gemini-2.5-flash",
     "openai/gpt-4o-mini",
     "qwen/qwen3.5-flash-02-23",
     "meta-llama/llama-4-scout",

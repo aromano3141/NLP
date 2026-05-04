@@ -1,0 +1,404 @@
+{
+  "google/gemini-2.5-flash-lite": {
+    "overall": {
+      "rfr": 0.455,
+      "ifr": 0.08,
+      "n": 200
+    },
+    "by_language": {
+      "English": {
+        "rfr": 0.4319,
+        "ifr": 0.075,
+        "n": 80
+      },
+      "Chinese": {
+        "rfr": 0.5711,
+        "ifr": 0.1,
+        "n": 40
+      },
+      "Arabic": {
+        "rfr": 0.3927,
+        "ifr": 0.05,
+        "n": 40
+      },
+      "Hindi": {
+        "rfr": 0.4475,
+        "ifr": 0.1,
+        "n": 40
+      }
+    },
+    "by_category": {
+      "Reasoning and Logic": {
+        "rfr": 0.5336,
+        "ifr": 0.0667,
+        "n": 30
+      },
+      "Language Style": {
+        "rfr": 0.4408,
+        "ifr": 0.1333,
+        "n": 30
+      },
+      "Programming": {
+        "rfr": 0.4417,
+        "ifr": 0.1,
+        "n": 30
+      },
+      "Dialogue System": {
+        "rfr": 0.3987,
+        "ifr": 0.0345,
+        "n": 29
+      },
+      "Classification": {
+        "rfr": 0.496,
+        "ifr": 0.069,
+        "n": 29
+      },
+      "Information Extraction": {
+        "rfr": 0.5827,
+        "ifr": 0.1538,
+        "n": 26
+      },
+      "Text Generation": {
+        "rfr": 0.2855,
+        "ifr": 0.0,
+        "n": 26
+      }
+    },
+    "by_constraint_type": {
+      "Format Constraint": {
+        "accuracy": 0.4886,
+        "passed": 215,
+        "total": 440
+      },
+      "Content Constraint": {
+        "accuracy": 0.4853,
+        "passed": 662,
+        "total": 1364
+      },
+      "Style Constraint": {
+        "accuracy": 0.4723,
+        "passed": 111,
+        "total": 235
+      },
+      "Situation Constraint": {
+        "accuracy": 0.297,
+        "passed": 49,
+        "total": 165
+      },
+      "Length Constraint": {
+        "accuracy": 0.1687,
+        "passed": 14,
+        "total": 83
+      }
+    },
+    "avg_length_deviation": 182.1722
+  },
+  "openai/gpt-4o-mini": {
+    "overall": {
+      "rfr": 0.5928,
+      "ifr": 0.11,
+      "n": 200
+    },
+    "by_language": {
+      "English": {
+        "rfr": 0.5041,
+        "ifr": 0.05,
+        "n": 80
+      },
+      "Chinese": {
+        "rfr": 0.7169,
+        "ifr": 0.25,
+        "n": 40
+      },
+      "Arabic": {
+        "rfr": 0.6109,
+        "ifr": 0.075,
+        "n": 40
+      },
+      "Hindi": {
+        "rfr": 0.6279,
+        "ifr": 0.125,
+        "n": 40
+      }
+    },
+    "by_category": {
+      "Reasoning and Logic": {
+        "rfr": 0.7493,
+        "ifr": 0.2333,
+        "n": 30
+      },
+      "Language Style": {
+        "rfr": 0.5092,
+        "ifr": 0.0667,
+        "n": 30
+      },
+      "Programming": {
+        "rfr": 0.5735,
+        "ifr": 0.0667,
+        "n": 30
+      },
+      "Dialogue System": {
+        "rfr": 0.6132,
+        "ifr": 0.069,
+        "n": 29
+      },
+      "Classification": {
+        "rfr": 0.6502,
+        "ifr": 0.069,
+        "n": 29
+      },
+      "Information Extraction": {
+        "rfr": 0.593,
+        "ifr": 0.1538,
+        "n": 26
+      },
+      "Text Generation": {
+        "rfr": 0.4437,
+        "ifr": 0.1154,
+        "n": 26
+      }
+    },
+    "by_constraint_type": {
+      "Format Constraint": {
+        "accuracy": 0.575,
+        "passed": 253,
+        "total": 440
+      },
+      "Content Constraint": {
+        "accuracy": 0.6224,
+        "passed": 849,
+        "total": 1364
+      },
+      "Style Constraint": {
+        "accuracy": 0.5787,
+        "passed": 136,
+        "total": 235
+      },
+      "Situation Constraint": {
+        "accuracy": 0.4606,
+        "passed": 76,
+        "total": 165
+      },
+      "Length Constraint": {
+        "accuracy": 0.3373,
+        "passed": 28,
+        "total": 83
+      }
+    },
+    "avg_length_deviation": 142.7971
+  },
+  "qwen/qwen3.5-flash-02-23": {
+    "overall": {
+      "rfr": 0.5867,
+      "ifr": 0.1055,
+      "n": 199
+    },
+    "by_language": {
+      "English": {
+        "rfr": 0.494,
+        "ifr": 0.038,
+        "n": 79
+      },
+      "Chinese": {
+        "rfr": 0.7849,
+        "ifr": 0.3,
+        "n": 40
+      },
+      "Arabic": {
+        "rfr": 0.6203,
+        "ifr": 0.125,
+        "n": 40
+      },
+      "Hindi": {
+        "rfr": 0.5378,
+        "ifr": 0.025,
+        "n": 40
+      }
+    },
+    "by_category": {
+      "Reasoning and Logic": {
+        "rfr": 0.6989,
+        "ifr": 0.1034,
+        "n": 29
+      },
+      "Language Style": {
+        "rfr": 0.5182,
+        "ifr": 0.1667,
+        "n": 30
+      },
+      "Programming": {
+        "rfr": 0.5396,
+        "ifr": 0.0667,
+        "n": 30
+      },
+      "Dialogue System": {
+        "rfr": 0.5779,
+        "ifr": 0.069,
+        "n": 29
+      },
+      "Classification": {
+        "rfr": 0.6567,
+        "ifr": 0.1379,
+        "n": 29
+      },
+      "Information Extraction": {
+        "rfr": 0.6935,
+        "ifr": 0.1923,
+        "n": 26
+      },
+      "Text Generation": {
+        "rfr": 0.4194,
+        "ifr": 0.0,
+        "n": 26
+      }
+    },
+    "by_constraint_type": {
+      "Content Constraint": {
+        "accuracy": 0.6207,
+        "passed": 841,
+        "total": 1355
+      },
+      "Format Constraint": {
+        "accuracy": 0.5672,
+        "passed": 249,
+        "total": 439
+      },
+      "Style Constraint": {
+        "accuracy": 0.5494,
+        "passed": 128,
+        "total": 233
+      },
+      "Situation Constraint": {
+        "accuracy": 0.4364,
+        "passed": 72,
+        "total": 165
+      },
+      "Length Constraint": {
+        "accuracy": 0.3012,
+        "passed": 25,
+        "total": 83
+      }
+    },
+    "avg_length_deviation": 155.7312
+  },
+  "meta-llama/llama-4-scout": {
+    "overall": {
+      "rfr": 0.5999,
+      "ifr": 0.105,
+      "n": 200
+    },
+    "by_language": {
+      "English": {
+        "rfr": 0.5777,
+        "ifr": 0.0375,
+        "n": 80
+      },
+      "Chinese": {
+        "rfr": 0.6452,
+        "ifr": 0.2,
+        "n": 40
+      },
+      "Arabic": {
+        "rfr": 0.5789,
+        "ifr": 0.05,
+        "n": 40
+      },
+      "Hindi": {
+        "rfr": 0.6199,
+        "ifr": 0.2,
+        "n": 40
+      }
+    },
+    "by_category": {
+      "Reasoning and Logic": {
+        "rfr": 0.7164,
+        "ifr": 0.1333,
+        "n": 30
+      },
+      "Language Style": {
+        "rfr": 0.5231,
+        "ifr": 0.1,
+        "n": 30
+      },
+      "Programming": {
+        "rfr": 0.5092,
+        "ifr": 0.0,
+        "n": 30
+      },
+      "Dialogue System": {
+        "rfr": 0.5661,
+        "ifr": 0.1034,
+        "n": 29
+      },
+      "Classification": {
+        "rfr": 0.6509,
+        "ifr": 0.069,
+        "n": 29
+      },
+      "Information Extraction": {
+        "rfr": 0.6723,
+        "ifr": 0.2692,
+        "n": 26
+      },
+      "Text Generation": {
+        "rfr": 0.5669,
+        "ifr": 0.0769,
+        "n": 26
+      }
+    },
+    "by_constraint_type": {
+      "Format Constraint": {
+        "accuracy": 0.5523,
+        "passed": 243,
+        "total": 440
+      },
+      "Content Constraint": {
+        "accuracy": 0.6422,
+        "passed": 876,
+        "total": 1364
+      },
+      "Style Constraint": {
+        "accuracy": 0.6,
+        "passed": 141,
+        "total": 235
+      },
+      "Situation Constraint": {
+        "accuracy": 0.4606,
+        "passed": 76,
+        "total": 165
+      },
+      "Length Constraint": {
+        "accuracy": 0.3494,
+        "passed": 29,
+        "total": 83
+      }
+    },
+    "avg_length_deviation": 128.714
+  },
+  "cultural_gap_analysis": {
+    "English": {
+      "google/gemini-2.5-flash-lite": 0.4319,
+      "openai/gpt-4o-mini": 0.5041,
+      "qwen/qwen3.5-flash-02-23": 0.494,
+      "meta-llama/llama-4-scout": 0.5777
+    },
+    "Chinese": {
+      "google/gemini-2.5-flash-lite": 0.5711,
+      "openai/gpt-4o-mini": 0.7169,
+      "qwen/qwen3.5-flash-02-23": 0.7849,
+      "meta-llama/llama-4-scout": 0.6452
+    },
+    "Arabic": {
+      "google/gemini-2.5-flash-lite": 0.3927,
+      "openai/gpt-4o-mini": 0.6109,
+      "qwen/qwen3.5-flash-02-23": 0.6203,
+      "meta-llama/llama-4-scout": 0.5789
+    },
+    "Hindi": {
+      "google/gemini-2.5-flash-lite": 0.4475,
+      "openai/gpt-4o-mini": 0.6279,
+      "qwen/qwen3.5-flash-02-23": 0.5378,
+      "meta-llama/llama-4-scout": 0.6199
+    }
+  }
+}
