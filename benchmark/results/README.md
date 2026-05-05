@@ -10,7 +10,27 @@
 ## Metrics
 
 - **RFR (Requirement Following Ratio):** % of individual constraints satisfied across all prompts
-- **IFR (Instruction Following Ratio):** % of prompts where every constraint was satisfied simultaneously
+- **IFR (Instruction Following Ratio):** % of prompts where every single constraint was satisfied simultaneously — the primary measure of compositional instruction following
+
+---
+
+## Evaluation Methodology
+
+Constraint scoring uses a two-track approach:
+
+**Deterministic (no LLM):**
+- Format constraints — regex checks for markdown tables, numbered lists, bullet points, JSON structure
+- Length constraints — word count, sentence count, character count, paragraph count with deviation scoring
+
+**LLM-as-Judge:**
+- Content constraints — e.g. "must mention X", "must reference rule Y"
+- Style constraints — tone, emotion, formality
+- Situation constraints — role-play, audience, context-setting
+- Format/Length fallback — if the regex/counter can't parse the constraint description, falls back to judge
+
+Roughly 75-80% of constraint checks go through the judge, 20-25% are deterministic. The judge receives only the constraint description and the model response — it is blind to which model generated the response, avoiding self-evaluation bias.
+
+All subjective constraints for a single prompt are batched into one judge call (rather than one call per constraint) for efficiency.
 
 ---
 
@@ -44,9 +64,26 @@
 
 ---
 
+## Files
+
+- `eval_report_799prompts_20260503_183714.json` — final aggregated results (RFR/IFR by model, language, category, constraint type)
+- `raw_results_799prompts_20260503_183714.json` — per-prompt, per-constraint pass/fail results for every model
+- `eval_report_300prompts_original_20260502_182251.json` — original run, see note below
+
+> **Note on file naming:** The `799` in filenames refers to total model evaluations across all 4 models (200+200+199+200), not the number of prompts.
+
+---
+
 ## Notes
 
-- Qwen evaluated on 199/200 prompts due to 1 timeout failure
-- `eval_report_799prompts_20260503_183714.json` — final results (gemini-2.5-flash)
-- `eval_report_799prompts_20260503_174941.json` — intermediate run with gemini-2.5-flash-lite
-- `eval_report_300prompts_original_20260502_182251.json` — original 300-prompt dataset run; English results valid, non-English results unreliable due to missing context in prompts
+### Why Qwen has 199 prompts
+`qwen/qwen3.5-flash-02-23` dropped 1 prompt in both runs due to repeated API timeouts (90s timeout, 3 retries exhausted). All other models completed 200/200. This model showed reliability issues across both runs and may be worth replacing in future evaluations.
+
+### Why the 300-prompt original run is unreliable for non-English
+The original dataset (`english.json`, `chinese.json`, `arabic.json`, `hindi.json`) stored background context in a `reading_materials` field separately from the `instruction` field. For English prompts, the generation pipeline embedded `reading_materials` directly into `instruction`, so the model received the full context. For Chinese, Arabic, and Hindi, `reading_materials` was stored separately and was never sent to the model — roughly 90% of non-English prompts were evaluated without their background context. Models correctly identified something was missing and responded asking for more input, resulting in near-zero scores. English results from that run are valid. The new 200-prompt dataset uses a unified `base_information` field that is always sent to the model.
+
+### Recommended judge models for future runs
+If re-running with a different judge, good options that are not in the evaluated set:
+- `anthropic/claude-haiku-4-5` — strong instruction-following evaluation, not in evaluated set
+- `openai/gpt-4o` — strong and reliable, higher cost
+- `meta-llama/llama-3.3-70b-instruct` — capable, cheap, not in evaluated set
