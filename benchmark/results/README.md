@@ -80,7 +80,4 @@ One prompt (`a01c497a-795f-4a24-9203-8a078f7758df`) consistently caused API time
 ### Why the 300-prompt original run is unreliable for non-English
 The original dataset stored background context in a `reading_materials` field separately from the `instruction` field. For English, the pipeline embedded this context directly into `instruction`. For Chinese, Arabic, and Hindi (~90% of prompts), context was stored separately and never sent to the model — models responded asking for more input, resulting in near-zero scores. English results from that run are valid. The new 200-prompt dataset uses a unified `base_information` field that is always included.
 
-### Recommended judge models for future runs
-- `anthropic/claude-haiku-4-5` — current judge, strong multilingual evaluation, not in evaluated set
-- `anthropic/claude-sonnet-4-5` — stronger accuracy, higher cost
-- `openai/gpt-4o` — reliable, higher cost
+
