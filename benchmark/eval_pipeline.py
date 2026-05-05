@@ -26,7 +26,12 @@ MODELS = [
     "meta-llama/llama-4-scout",
 ]
 
-JUDGE_MODEL = "google/gemini-2.5-flash"
+JUDGE_MODEL = "anthropic/claude-haiku-4-5"
+
+# Prompts excluded from all models for fair comparison (e.g. persistent API failures)
+EXCLUDED_PROMPT_IDS = {
+    "a01c497a-795f-4a24-9203-8a078f7758df",
+}
 
 DATASET_DIR = Path(__file__).parent.parent / "dataset"
 DATASET_FILES = {
@@ -133,7 +138,8 @@ async def main():
         raise ValueError("OPENROUTER_API_KEY not set in .env")
 
     prompts = load_dataset()
-    logger.info(f"Total prompts: {len(prompts)}")
+    prompts = [p for p in prompts if p.id not in EXCLUDED_PROMPT_IDS]
+    logger.info(f"Total prompts after exclusions: {len(prompts)}")
 
     # Phase 1: Inference — send prompts to all 4 models
     runner = InferenceRunner(
