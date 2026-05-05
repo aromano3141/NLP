@@ -3,27 +3,32 @@
     "overall": {
       "rfr": 0.4902,
       "ifr": 0.0402,
+      "gap": 0.45,
       "n": 199
     },
     "by_language": {
       "English": {
         "rfr": 0.4471,
         "ifr": 0.038,
+        "gap": 0.4091,
         "n": 79
       },
       "Chinese": {
         "rfr": 0.6534,
         "ifr": 0.05,
+        "gap": 0.6034,
         "n": 40
       },
       "Arabic": {
         "rfr": 0.4104,
         "ifr": 0.025,
+        "gap": 0.3854,
         "n": 40
       },
       "Hindi": {
         "rfr": 0.4921,
         "ifr": 0.05,
+        "gap": 0.4421,
         "n": 40
       }
     },
@@ -31,36 +36,43 @@
       "Reasoning and Logic": {
         "rfr": 0.6466,
         "ifr": 0.1379,
+        "gap": 0.5087,
         "n": 29
       },
       "Language Style": {
         "rfr": 0.4054,
         "ifr": 0.0333,
+        "gap": 0.3721,
         "n": 30
       },
       "Programming": {
         "rfr": 0.3179,
         "ifr": 0.0,
+        "gap": 0.3179,
         "n": 30
       },
       "Dialogue System": {
         "rfr": 0.5157,
         "ifr": 0.0,
+        "gap": 0.5157,
         "n": 29
       },
       "Classification": {
         "rfr": 0.5193,
         "ifr": 0.0,
+        "gap": 0.5193,
         "n": 29
       },
       "Information Extraction": {
         "rfr": 0.6837,
         "ifr": 0.1154,
+        "gap": 0.5683,
         "n": 26
       },
       "Text Generation": {
         "rfr": 0.3581,
         "ifr": 0.0,
+        "gap": 0.3581,
         "n": 26
       }
     },
@@ -91,33 +103,39 @@
         "total": 83
       }
     },
-    "avg_length_deviation": 184.6977
+    "avg_length_deviation": 184.6977,
+    "avg_length_score": 8.122
   },
   "openai/gpt-4o-mini": {
     "overall": {
       "rfr": 0.6434,
       "ifr": 0.1005,
+      "gap": 0.5429,
       "n": 199
     },
     "by_language": {
       "English": {
         "rfr": 0.572,
         "ifr": 0.0633,
+        "gap": 0.5087,
         "n": 79
       },
       "Chinese": {
         "rfr": 0.7497,
         "ifr": 0.175,
+        "gap": 0.5747,
         "n": 40
       },
       "Arabic": {
         "rfr": 0.6776,
         "ifr": 0.125,
+        "gap": 0.5526,
         "n": 40
       },
       "Hindi": {
         "rfr": 0.6437,
         "ifr": 0.075,
+        "gap": 0.5687,
         "n": 40
       }
     },
@@ -125,36 +143,43 @@
       "Reasoning and Logic": {
         "rfr": 0.7406,
         "ifr": 0.1724,
+        "gap": 0.5682,
         "n": 29
       },
       "Language Style": {
         "rfr": 0.6054,
         "ifr": 0.1,
+        "gap": 0.5054,
         "n": 30
       },
       "Programming": {
         "rfr": 0.5798,
         "ifr": 0.1,
+        "gap": 0.4798,
         "n": 30
       },
       "Dialogue System": {
         "rfr": 0.675,
         "ifr": 0.1034,
+        "gap": 0.5716,
         "n": 29
       },
       "Classification": {
         "rfr": 0.7276,
         "ifr": 0.1034,
+        "gap": 0.6242,
         "n": 29
       },
       "Information Extraction": {
         "rfr": 0.7239,
         "ifr": 0.0385,
+        "gap": 0.6854,
         "n": 26
       },
       "Text Generation": {
         "rfr": 0.4422,
         "ifr": 0.0769,
+        "gap": 0.3653,
         "n": 26
       }
     },
@@ -185,33 +210,39 @@
         "total": 83
       }
     },
-    "avg_length_deviation": 142.7971
+    "avg_length_deviation": 142.7971,
+    "avg_length_score": 6.7968
   },
   "qwen/qwen3.5-flash-02-23": {
     "overall": {
       "rfr": 0.6064,
       "ifr": 0.0804,
+      "gap": 0.526,
       "n": 199
     },
     "by_language": {
       "English": {
         "rfr": 0.5628,
         "ifr": 0.038,
+        "gap": 0.5248,
         "n": 79
       },
       "Chinese": {
         "rfr": 0.7666,
         "ifr": 0.2,
+        "gap": 0.5666,
         "n": 40
       },
       "Arabic": {
         "rfr": 0.5726,
         "ifr": 0.075,
+        "gap": 0.4976,
         "n": 40
       },
       "Hindi": {
         "rfr": 0.5662,
         "ifr": 0.05,
+        "gap": 0.5162,
         "n": 40
       }
     },
@@ -219,36 +250,43 @@
       "Reasoning and Logic": {
         "rfr": 0.7322,
         "ifr": 0.1724,
+        "gap": 0.5598,
         "n": 29
       },
       "Language Style": {
         "rfr": 0.6018,
         "ifr": 0.1,
+        "gap": 0.5018,
         "n": 30
       },
       "Programming": {
         "rfr": 0.4156,
         "ifr": 0.0,
+        "gap": 0.4156,
         "n": 30
       },
       "Dialogue System": {
         "rfr": 0.6669,
         "ifr": 0.069,
+        "gap": 0.5979,
         "n": 29
       },
       "Classification": {
         "rfr": 0.6517,
         "ifr": 0.1034,
+        "gap": 0.5483,
         "n": 29
       },
       "Information Extraction": {
         "rfr": 0.7253,
         "ifr": 0.1154,
+        "gap": 0.6099,
         "n": 26
       },
       "Text Generation": {
         "rfr": 0.4548,
         "ifr": 0.0,
+        "gap": 0.4548,
         "n": 26
       }
     },
@@ -279,33 +317,39 @@
         "total": 83
       }
     },
-    "avg_length_deviation": 155.7312
+    "avg_length_deviation": 155.7312,
+    "avg_length_score": 6.7626
   },
   "meta-llama/llama-4-scout": {
     "overall": {
       "rfr": 0.6492,
       "ifr": 0.0704,
+      "gap": 0.5788,
       "n": 199
     },
     "by_language": {
       "English": {
         "rfr": 0.6349,
         "ifr": 0.038,
+        "gap": 0.5969,
         "n": 79
       },
       "Chinese": {
         "rfr": 0.6679,
         "ifr": 0.1,
+        "gap": 0.5679,
         "n": 40
       },
       "Arabic": {
         "rfr": 0.6685,
         "ifr": 0.075,
+        "gap": 0.5935,
         "n": 40
       },
       "Hindi": {
         "rfr": 0.6395,
         "ifr": 0.1,
+        "gap": 0.5395,
         "n": 40
       }
     },
@@ -313,36 +357,43 @@
       "Reasoning and Logic": {
         "rfr": 0.7391,
         "ifr": 0.1724,
+        "gap": 0.5667,
         "n": 29
       },
       "Language Style": {
         "rfr": 0.6343,
         "ifr": 0.0667,
+        "gap": 0.5676,
         "n": 30
       },
       "Programming": {
         "rfr": 0.5528,
         "ifr": 0.0,
+        "gap": 0.5528,
         "n": 30
       },
       "Dialogue System": {
         "rfr": 0.6889,
         "ifr": 0.069,
+        "gap": 0.6199,
         "n": 29
       },
       "Classification": {
         "rfr": 0.6734,
         "ifr": 0.069,
+        "gap": 0.6044,
         "n": 29
       },
       "Information Extraction": {
         "rfr": 0.6813,
         "ifr": 0.1154,
+        "gap": 0.5659,
         "n": 26
       },
       "Text Generation": {
         "rfr": 0.5739,
         "ifr": 0.0,
+        "gap": 0.5739,
         "n": 26
       }
     },
@@ -373,32 +424,97 @@
         "total": 83
       }
     },
-    "avg_length_deviation": 128.714
+    "avg_length_deviation": 128.714,
+    "avg_length_score": 7.1499
   },
   "cultural_gap_analysis": {
     "English": {
-      "google/gemini-2.5-flash": 0.4471,
-      "openai/gpt-4o-mini": 0.572,
-      "qwen/qwen3.5-flash-02-23": 0.5628,
-      "meta-llama/llama-4-scout": 0.6349
+      "google/gemini-2.5-flash": {
+        "rfr": 0.4471,
+        "ifr": 0.038,
+        "gap": 0.4091
+      },
+      "openai/gpt-4o-mini": {
+        "rfr": 0.572,
+        "ifr": 0.0633,
+        "gap": 0.5087
+      },
+      "qwen/qwen3.5-flash-02-23": {
+        "rfr": 0.5628,
+        "ifr": 0.038,
+        "gap": 0.5248
+      },
+      "meta-llama/llama-4-scout": {
+        "rfr": 0.6349,
+        "ifr": 0.038,
+        "gap": 0.5969
+      }
     },
     "Chinese": {
-      "google/gemini-2.5-flash": 0.6534,
-      "openai/gpt-4o-mini": 0.7497,
-      "qwen/qwen3.5-flash-02-23": 0.7666,
-      "meta-llama/llama-4-scout": 0.6679
+      "google/gemini-2.5-flash": {
+        "rfr": 0.6534,
+        "ifr": 0.05,
+        "gap": 0.6034
+      },
+      "openai/gpt-4o-mini": {
+        "rfr": 0.7497,
+        "ifr": 0.175,
+        "gap": 0.5747
+      },
+      "qwen/qwen3.5-flash-02-23": {
+        "rfr": 0.7666,
+        "ifr": 0.2,
+        "gap": 0.5666
+      },
+      "meta-llama/llama-4-scout": {
+        "rfr": 0.6679,
+        "ifr": 0.1,
+        "gap": 0.5679
+      }
     },
     "Arabic": {
-      "google/gemini-2.5-flash": 0.4104,
-      "openai/gpt-4o-mini": 0.6776,
-      "qwen/qwen3.5-flash-02-23": 0.5726,
-      "meta-llama/llama-4-scout": 0.6685
+      "google/gemini-2.5-flash": {
+        "rfr": 0.4104,
+        "ifr": 0.025,
+        "gap": 0.3854
+      },
+      "openai/gpt-4o-mini": {
+        "rfr": 0.6776,
+        "ifr": 0.125,
+        "gap": 0.5526
+      },
+      "qwen/qwen3.5-flash-02-23": {
+        "rfr": 0.5726,
+        "ifr": 0.075,
+        "gap": 0.4976
+      },
+      "meta-llama/llama-4-scout": {
+        "rfr": 0.6685,
+        "ifr": 0.075,
+        "gap": 0.5935
+      }
     },
     "Hindi": {
-      "google/gemini-2.5-flash": 0.4921,
-      "openai/gpt-4o-mini": 0.6437,
-      "qwen/qwen3.5-flash-02-23": 0.5662,
-      "meta-llama/llama-4-scout": 0.6395
+      "google/gemini-2.5-flash": {
+        "rfr": 0.4921,
+        "ifr": 0.05,
+        "gap": 0.4421
+      },
+      "openai/gpt-4o-mini": {
+        "rfr": 0.6437,
+        "ifr": 0.075,
+        "gap": 0.5687
+      },
+      "qwen/qwen3.5-flash-02-23": {
+        "rfr": 0.5662,
+        "ifr": 0.05,
+        "gap": 0.5162
+      },
+      "meta-llama/llama-4-scout": {
+        "rfr": 0.6395,
+        "ifr": 0.1,
+        "gap": 0.5395
+      }
     }
   }
 }

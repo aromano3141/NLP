@@ -9,8 +9,13 @@
 
 ## Metrics
 
-- **RFR (Requirement Following Ratio):** % of individual constraints satisfied across all prompts
-- **IFR (Instruction Following Ratio):** % of prompts where every single constraint was satisfied simultaneously — the primary measure of compositional instruction following
+Metrics drawn from related works (XIFBench, EIFBENCH, LIFEBENCH):
+
+- **RFR (Requirement Following Ratio):** % of individual constraints satisfied across all prompts — from XIFBench
+- **IFR (Instruction Following Ratio):** % of prompts where every single constraint was satisfied simultaneously — primary measure of compositional following, from XIFBench
+- **GAP (RFR-IFR Gap):** RFR minus IFR per language — reveals compositional collapse: how much performance drops when all constraints must be satisfied simultaneously vs. individually, from XIFBench
+- **LD (Length Deviation):** `(output_length - target_length) / target_length` — signed ratio showing over/under-generation magnitude, from LIFEBENCH
+- **LS (Length Score):** `100 × e^(-2 × |LD|)` — non-linear score mapping deviation to [0,100] so outliers don't skew averages, from LIFEBENCH
 
 ---
 
@@ -62,9 +67,22 @@ Roughly 75-80% of constraint checks go through the judge, 20-25% are determinist
 
 ---
 
+## RFR-IFR Gap by Language
+
+High gap = model follows individual constraints but collapses when all must be satisfied simultaneously.
+
+| Language | Gemini-2.5 | GPT-4o-Mini | Qwen3.5 | Llama-4-Scout |
+|---|---|---|---|---|
+| English | 0.409 | 0.509 | 0.525 | 0.597 |
+| Chinese | 0.603 | 0.575 | 0.567 | 0.568 |
+| Arabic | 0.385 | 0.553 | 0.498 | 0.594 |
+| Hindi | 0.442 | 0.569 | 0.516 | 0.539 |
+
+---
+
 ## Files
 
-- `eval_report_796prompts_20260504_215022.json` — final aggregated results (199 prompts, Claude Haiku judge)
+- `eval_report_796prompts_20260504_223340.json` — final aggregated results with all metrics (RFR, IFR, GAP, LD, LS)
 - `raw_results_796prompts_20260504_215022.json` — per-prompt, per-constraint pass/fail for every model
 - `eval_report_300prompts_original_20260502_182251.json` — original run, see notes below
 
@@ -79,5 +97,4 @@ One prompt (`a01c497a-795f-4a24-9203-8a078f7758df`) consistently caused API time
 
 ### Why the 300-prompt original run is unreliable for non-English
 The original dataset stored background context in a `reading_materials` field separately from the `instruction` field. For English, the pipeline embedded this context directly into `instruction`. For Chinese, Arabic, and Hindi (~90% of prompts), context was stored separately and never sent to the model — models responded asking for more input, resulting in near-zero scores. English results from that run are valid. The new 200-prompt dataset uses a unified `base_information` field that is always included.
-
 
